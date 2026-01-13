@@ -1,5 +1,5 @@
 import { useEffect, useState, Fragment } from 'react';
-import { ArrowLeft, Search, Filter, ChevronDown, ChevronUp } from 'lucide-react';
+import { ArrowLeft, Search, Filter, ChevronDown, ChevronRight, Package, MapPin } from 'lucide-react';
 import { collection, query, getDocs, updateDoc, doc, getDoc } from 'firebase/firestore';
 import { db } from '../lib/firebase';
 
@@ -11,15 +11,23 @@ interface Order {
     final_amount: number;
     created_at: string;
     user_id: string;
-    order_items: {
+    order_items: Array<{
+        product_id: string;
+        quantity: number;
         product: {
             name: string;
             primary_image: string;
         };
-        quantity: number;
-        unit_price: number;
         total_price: number;
-    }[];
+    }>;
+    shipping_address: {
+        street: string;
+        city: string;
+        state: string;
+        zip: string;
+        country: string;
+    };
+    discount_amount?: number;
     profiles: {
         name: string;
         phone: string;
@@ -179,10 +187,12 @@ export default function AdminOrders({ onBack }: AdminOrdersProps) {
                     <table className="w-full">
                         <thead className="bg-gray-50 dark:bg-primary">
                             <tr>
+                                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider w-10"></th>
                                 <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider">Order Details</th>
                                 <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider">Customer</th>
                                 <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider">Amount</th>
                                 <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider">Date</th>
+                                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider">Time</th>
                                 <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider">Status</th>
                             </tr>
                         </thead>
@@ -191,22 +201,20 @@ export default function AdminOrders({ onBack }: AdminOrdersProps) {
                                 <Fragment key={order.id}>
                                     <tr className="hover:bg-gray-50 dark:hover:bg-primary transition-colors">
                                         <td className="px-6 py-4 whitespace-nowrap">
-                                            <div className="flex items-center gap-3">
-                                                <button
-                                                    onClick={() => setExpandedOrderId(expandedOrderId === order.id ? null : order.id)}
-                                                    className="text-gray-400 hover:text-primary dark:hover:text-accent transition-colors"
-                                                >
-                                                    {expandedOrderId === order.id ? (
-                                                        <ChevronUp className="w-5 h-5" />
-                                                    ) : (
-                                                        <ChevronDown className="w-5 h-5" />
-                                                    )}
-                                                </button>
-                                                <div>
-                                                    <div className="text-sm font-medium text-gray-900 dark:text-gray-100">{order.order_no}</div>
-                                                    <div className="text-sm text-gray-500 dark:text-gray-400">Bill ID: {order.bill_id}</div>
-                                                </div>
-                                            </div>
+                                            <button
+                                                onClick={() => setExpandedOrderId(expandedOrderId === order.id ? null : order.id)}
+                                                className="text-gray-500 hover:text-primary transition-colors"
+                                            >
+                                                {expandedOrderId === order.id ? (
+                                                    <ChevronDown className="w-5 h-5" />
+                                                ) : (
+                                                    <ChevronRight className="w-5 h-5" />
+                                                )}
+                                            </button>
+                                        </td>
+                                        <td className="px-6 py-4 whitespace-nowrap">
+                                            <div className="text-sm font-medium text-gray-900 dark:text-gray-100">{order.order_no}</div>
+                                            <div className="text-sm text-gray-500 dark:text-gray-400">Bill ID: {order.bill_id}</div>
                                         </td>
                                         <td className="px-6 py-4 whitespace-nowrap">
                                             <div className="text-sm text-gray-900 dark:text-gray-100">{order.profiles.name}</div>
@@ -221,6 +229,8 @@ export default function AdminOrders({ onBack }: AdminOrdersProps) {
                                             <div className="text-sm text-gray-900 dark:text-gray-100">
                                                 {new Date(order.created_at).toLocaleDateString()}
                                             </div>
+                                        </td>
+                                        <td className="px-6 py-4 whitespace-nowrap">
                                             <div className="text-xs text-gray-500 dark:text-gray-400">
                                                 {new Date(order.created_at).toLocaleTimeString()}
                                             </div>
@@ -244,34 +254,81 @@ export default function AdminOrders({ onBack }: AdminOrdersProps) {
                                         </td>
                                     </tr>
                                     {expandedOrderId === order.id && (
-                                        <tr>
-                                            <td colSpan={5} className="bg-gray-50 dark:bg-primary-light/50 px-6 py-4">
-                                                <div className="text-sm">
-                                                    <p className="font-bold mb-3 text-gray-700 dark:text-gray-300">Order Items:</p>
-                                                    <div className="grid gap-4">
-                                                        <table className="w-full text-left">
-                                                            <thead>
-                                                                <tr className="border-b border-gray-200 dark:border-primary">
-                                                                    <th className="pb-2 text-xs text-gray-500">Product</th>
-                                                                    <th className="pb-2 text-xs text-gray-500">Qty</th>
-                                                                    <th className="pb-2 text-xs text-gray-500">Price</th>
-                                                                    <th className="pb-2 text-xs text-gray-500">Total</th>
-                                                                </tr>
-                                                            </thead>
-                                                            <tbody>
-                                                                {order.order_items?.map((item, idx) => (
-                                                                    <tr key={idx} className="border-b border-gray-100 dark:border-primary last:border-0">
-                                                                        <td className="py-2 flex items-center gap-3">
-                                                                            <img src={item.product?.primary_image} alt="" className="w-10 h-10 rounded object-cover" />
-                                                                            <span className="text-gray-900 dark:text-gray-100">{item.product?.name}</span>
-                                                                        </td>
-                                                                        <td className="py-2 text-gray-600 dark:text-gray-400">{item.quantity}</td>
-                                                                        <td className="py-2 text-gray-600 dark:text-gray-400">${item.unit_price}</td>
-                                                                        <td className="py-2 font-medium text-gray-900 dark:text-gray-100">${item.total_price}</td>
-                                                                    </tr>
-                                                                ))}
-                                                            </tbody>
-                                                        </table>
+                                        <tr className="bg-gray-50/50 dark:bg-primary/20">
+                                            <td colSpan={7} className="px-6 py-6">
+                                                <div className="grid md:grid-cols-2 gap-6">
+                                                    {/* Order Items Card */}
+                                                    <div className="bg-white dark:bg-primary-light rounded-xl p-6 shadow-sm border border-gray-100 dark:border-primary">
+                                                        <h4 className="font-bold flex items-center gap-2 text-sm text-gray-900 dark:text-gray-100 mb-4 pb-2 border-b border-gray-100 dark:border-primary">
+                                                            <Package className="w-4 h-4 text-primary dark:text-accent" />
+                                                            Order Summary
+                                                        </h4>
+                                                        <div className="space-y-4">
+                                                            {order.order_items?.map((item, idx) => (
+                                                                <div key={idx} className="flex gap-4 text-sm group">
+                                                                    <div className="relative overflow-hidden rounded-lg w-16 h-16 bg-gray-100">
+                                                                        <img
+                                                                            src={item.product?.primary_image}
+                                                                            alt={item.product?.name}
+                                                                            className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+                                                                        />
+                                                                    </div>
+                                                                    <div className="flex-1 min-w-0">
+                                                                        <p className="font-medium text-gray-900 dark:text-gray-100 truncate">{item.product?.name}</p>
+                                                                        <div className="flex items-center gap-2 mt-1 text-xs text-gray-500 dark:text-gray-400">
+                                                                            <span className="bg-gray-100 dark:bg-primary px-2 py-0.5 rounded">Qty: {item.quantity}</span>
+                                                                            <span>×</span>
+                                                                            <span>${(item.total_price / item.quantity).toFixed(2)}</span>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div className="font-medium text-gray-900 dark:text-gray-100">
+                                                                        ${item.total_price.toFixed(2)}
+                                                                    </div>
+                                                                </div>
+                                                            ))}
+                                                        </div>
+                                                        <div className="border-t border-gray-100 dark:border-primary pt-4 mt-6 space-y-2">
+                                                            {order.discount_amount ? (
+                                                                <div className="flex justify-between text-sm text-green-600 dark:text-green-400">
+                                                                    <span>Discount</span>
+                                                                    <span>-${order.discount_amount.toFixed(2)}</span>
+                                                                </div>
+                                                            ) : null}
+                                                            <div className="flex justify-between text-base font-bold text-gray-900 dark:text-gray-100 pt-2">
+                                                                <span>Total Amount</span>
+                                                                <span className="text-primary dark:text-accent">${order.final_amount.toFixed(2)}</span>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
+                                                    {/* Delivery & Customer Details Card */}
+                                                    <div className="bg-white dark:bg-primary-light rounded-xl p-6 shadow-sm border border-gray-100 dark:border-primary h-fit">
+                                                        <h4 className="font-bold flex items-center gap-2 text-sm text-gray-900 dark:text-gray-100 mb-4 pb-2 border-b border-gray-100 dark:border-primary">
+                                                            <MapPin className="w-4 h-4 text-primary dark:text-accent" />
+                                                            Delivery Details
+                                                        </h4>
+
+                                                        <div className="space-y-6">
+                                                            <div>
+                                                                <h5 className="text-xs font-semibold uppercase tracking-wider text-gray-500 dark:text-gray-400 mb-3">Shipping Address</h5>
+                                                                <div className="text-sm text-gray-700 dark:text-gray-300 leading-relaxed bg-gray-50 dark:bg-primary/50 p-4 rounded-lg">
+                                                                    <p className="font-medium text-gray-900 dark:text-gray-100 mb-1">{order.profiles.name}</p>
+                                                                    <p>{order.shipping_address?.street}</p>
+                                                                    <p>{order.shipping_address?.city}, {order.shipping_address?.state} {order.shipping_address?.zip}</p>
+                                                                    <p>{order.shipping_address?.country}</p>
+                                                                </div>
+                                                            </div>
+
+                                                            <div>
+                                                                <h5 className="text-xs font-semibold uppercase tracking-wider text-gray-500 dark:text-gray-400 mb-3">Contact Information</h5>
+                                                                <div className="grid grid-cols-2 gap-4">
+                                                                    <div className="bg-gray-50 dark:bg-primary/50 p-3 rounded-lg">
+                                                                        <span className="block text-xs text-gray-500 dark:text-gray-400 mb-1">Phone</span>
+                                                                        <span className="text-sm font-medium text-gray-900 dark:text-gray-100">{order.profiles.phone}</span>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
                                                     </div>
                                                 </div>
                                             </td>
@@ -288,6 +345,6 @@ export default function AdminOrders({ onBack }: AdminOrdersProps) {
                     </div>
                 )}
             </div>
-        </div >
+        </div>
     );
 }

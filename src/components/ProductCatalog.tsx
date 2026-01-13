@@ -21,6 +21,8 @@ interface Product {
   hover_image: string;
   detail_images: string[];
   created_at?: any;
+  rating?: number;
+  review_count?: number;
 }
 
 export default function ProductCatalog() {
@@ -238,7 +240,7 @@ export default function ProductCatalog() {
               <ProductCard
                 key={product.id}
                 product={product}
-                onClick={() => setSelectedProduct(product)}
+                onQuickView={setSelectedProduct}
               />
             ))}
           </div>
