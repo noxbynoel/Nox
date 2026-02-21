@@ -1,4 +1,9 @@
 import { motion } from 'framer-motion';
+import { useAuth } from '../contexts/AuthContext';
+import { useCart } from '../contexts/CartContext';
+import { useTheme } from '../contexts/ThemeContext';
+import { User, Sun, Moon } from 'lucide-react';
+import { useState } from 'react';
 
 interface Product {
     id: string;
@@ -14,9 +19,16 @@ interface Product {
 interface AlternateHeroProps {
     products: Product[];
     onProductClick: (index: number) => void;
+    onShowAuth?: (mode: 'login' | 'register') => void;
+    onShowCart?: () => void;
+    onNavigate?: (page: string) => void;
 }
 
-export default function AlternateHero({ products, onProductClick }: AlternateHeroProps) {
+export default function AlternateHero({ products, onProductClick, onShowAuth, onShowCart, onNavigate }: AlternateHeroProps) {
+    const { user, profile, signOut } = useAuth();
+    const { getTotalItems } = useCart();
+    const { theme, toggleTheme } = useTheme();
+    const [showMenu, setShowMenu] = useState(false);
 
     if (!products || products.length === 0) {
         return (
@@ -43,14 +55,49 @@ export default function AlternateHero({ products, onProductClick }: AlternateHer
                     </div>
                 </div>
 
-                <div className="flex items-center gap-6 mt-2">
-                    <div className="hidden md:flex items-center gap-4 bg-white dark:bg-primary-dark px-4 py-2 border border-black/5 dark:border-accent/10 shadow-sm text-[10px] font-bold tracking-[0.15em] uppercase text-black/60 dark:text-accent/60">
-                        <span>Collection</span>
-                        <span>01 / 01</span>
+                <div className="flex flex-col items-end gap-4 mt-2 relative z-50">
+                    {/* Header Controls */}
+                    <div className="flex items-center gap-6 text-[10px] font-bold tracking-[0.15em] uppercase text-black/60 dark:text-accent/60">
+                        <span onClick={() => onNavigate?.('home')} className="cursor-pointer hover:text-black dark:hover:text-accent transition-colors">Collections</span>
+
+
+                        <button onClick={toggleTheme} className="hover:text-black dark:hover:text-accent transition-colors">
+                            {theme === 'light' ? <Moon className="w-4 h-4" /> : <Sun className="w-4 h-4" />}
+                        </button>
+
+                        {user && profile ? (
+                            <div className="relative">
+                                <button onClick={() => setShowMenu(!showMenu)} className="flex items-center gap-2 hover:text-black dark:hover:text-accent transition-colors">
+                                    <User className="w-4 h-4" />
+                                    <span>{profile.name}</span>
+                                </button>
+                                {showMenu && (
+                                    <div className="absolute right-0 mt-4 w-48 bg-white dark:bg-primary-light border border-black/5 dark:border-accent/10 shadow-lg py-4 flex flex-col items-start px-4 gap-4 z-50">
+                                        <button onClick={() => { onNavigate?.('dashboard'); setShowMenu(false); }} className="w-full text-left hover:text-black dark:hover:text-accent transition-colors uppercase tracking-[0.15em] text-[10px] font-bold">My Orders</button>
+                                        <button onClick={() => { onNavigate?.('profile'); setShowMenu(false); }} className="w-full text-left hover:text-black dark:hover:text-accent transition-colors uppercase tracking-[0.15em] text-[10px] font-bold">Profile</button>
+                                        <button onClick={async () => { await signOut(); setShowMenu(false); }} className="w-full text-left text-red-500 hover:text-red-700 transition-colors uppercase tracking-[0.15em] text-[10px] font-bold">Sign Out</button>
+                                    </div>
+                                )}
+                            </div>
+                        ) : (
+                            <button onClick={() => onShowAuth?.('login')} className="hover:text-black dark:hover:text-accent transition-colors">
+                                Sign In
+                            </button>
+                        )}
                     </div>
-                    <div className="flex items-center gap-2 text-[10px] font-bold tracking-[0.15em] uppercase text-black/60 dark:text-accent/60">
-                        <span>Cart</span>
-                        <span>00</span>
+
+                    {/* Collection and Cart Context */}
+                    <div className="flex items-center gap-6">
+                        <div className="hidden md:flex items-center gap-4 bg-white dark:bg-primary-dark px-4 py-2 border border-black/5 dark:border-accent/10 shadow-sm text-[10px] font-bold tracking-[0.15em] uppercase text-black/60 dark:text-accent/60">
+                            <span>Collection</span>
+                            <span>01 / 01</span>
+                        </div>
+                        <div
+                            onClick={() => onShowCart?.()}
+                            className="flex items-center gap-2 text-[10px] font-bold tracking-[0.15em] uppercase text-black/60 dark:text-accent/60 cursor-pointer hover:text-black dark:hover:text-accent transition-colors">
+                            <span>Cart</span>
+                            <span>{getTotalItems().toString().padStart(2, '0')}</span>
+                        </div>
                     </div>
                 </div>
             </div>
