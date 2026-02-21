@@ -29,7 +29,11 @@ interface Order {
   }>;
 }
 
-export default function Dashboard() {
+interface DashboardProps {
+  onNavigate?: (page: string) => void;
+}
+
+export default function Dashboard({ onNavigate }: DashboardProps) {
   const { user } = useAuth();
   const [orders, setOrders] = useState<Order[]>([]);
   const [loading, setLoading] = useState(true);
@@ -207,9 +211,17 @@ Thank you for your purchase!
 
   return (
     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-      <h1 className="text-4xl font-serif font-bold text-primary dark:text-accent mb-8">
-        My Orders
-      </h1>
+      <div className="flex items-center justify-between mb-8">
+        <h1 className="text-4xl font-serif font-bold text-primary dark:text-accent">
+          My Orders
+        </h1>
+        <button
+          onClick={() => onNavigate?.('home')}
+          className="px-4 py-2 bg-gray-200 dark:bg-primary text-gray-700 dark:text-gray-300 rounded-lg hover:bg-gray-300 dark:hover:bg-primary-dark transition-smooth"
+        >
+          Back to Home
+        </button>
+      </div>
 
       {orders.length === 0 ? (
         <div className="text-center py-12">
