@@ -1,17 +1,14 @@
 import { useState } from 'react';
 import { useAuth } from './contexts/AuthContext';
-import Header from './components/Header';
 import AuthModal from './components/AuthModal';
 import ProductCatalog from './components/ProductCatalog';
 import CartSidebar from './components/CartSidebar';
 import Checkout from './components/Checkout';
 import Dashboard from './components/Dashboard';
-import AdminPanel from './components/AdminPanel';
-import AdminOrders from './components/AdminOrders';
 import UserProfile from './components/UserProfile';
 import Footer from './components/Footer';
 
-type Page = 'home' | 'checkout' | 'dashboard' | 'profile' | 'admin' | 'admin-orders';
+type Page = 'home' | 'checkout' | 'dashboard' | 'profile';
 
 function App() {
   const { loading } = useAuth();
@@ -44,13 +41,15 @@ function App() {
 
   return (
     <div className="min-h-screen bg-gray-50 dark:bg-primary transition-smooth">
-      <Header
-        onShowAuth={handleShowAuth}
-        onShowCart={() => setShowCart(true)}
-        onNavigate={(page) => setCurrentPage(page as Page)}
-      />
 
-      {currentPage === 'home' && <ProductCatalog />}
+
+      {currentPage === 'home' && (
+        <ProductCatalog
+          onShowAuth={handleShowAuth}
+          onShowCart={() => setShowCart(true)}
+          onNavigate={(page) => setCurrentPage(page as Page)}
+        />
+      )}
       {currentPage === 'checkout' && (
         <Checkout
           onBack={() => setCurrentPage('home')}
@@ -59,8 +58,6 @@ function App() {
       )}
       {currentPage === 'dashboard' && <Dashboard />}
       {currentPage === 'profile' && <UserProfile />}
-      {currentPage === 'admin' && <AdminPanel onNavigate={(page) => setCurrentPage(page as Page)} />}
-      {currentPage === 'admin-orders' && <AdminOrders onBack={() => setCurrentPage('admin')} />}
 
       {showAuth && (
         <AuthModal

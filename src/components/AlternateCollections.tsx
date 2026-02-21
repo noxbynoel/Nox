@@ -92,7 +92,7 @@ export default function AlternateCollections({ products, externalSelectedIndex =
     };
 
     return (
-        <section className="relative w-full h-[85vh] bg-gray-50 dark:bg-primary overflow-hidden font-sans text-primary dark:text-accent flex flex-col md:flex-row border-b border-gray-200 dark:border-accent/10 transition-colors duration-500 select-none">
+        <section className="relative w-full h-[100vh] min-h-[800px] bg-gray-50 dark:bg-primary overflow-hidden font-sans text-primary dark:text-accent flex flex-col md:flex-row border-b border-gray-200 dark:border-accent/10 transition-colors duration-500 select-none">
 
             {/* LEFT PANEL */}
             <div className="w-full md:w-[35%] lg:w-[30%] h-[40%] md:h-full p-8 md:p-16 flex flex-col justify-center relative z-20 border-b md:border-b-0 md:border-r border-gray-200 dark:border-accent/10 bg-gray-50 dark:bg-primary shadow-[10px_0_30px_-10px_rgba(0,0,0,0.05)] dark:shadow-[10px_0_30px_-10px_rgba(0,0,0,0.5)] transition-colors duration-500">
