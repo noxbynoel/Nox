@@ -13,10 +13,7 @@ export default function Footer({ onNavigate }: FooterProps) {
 
   const links = [
     { label: 'About', page: 'home' },
-    { label: 'Products', page: 'home' },
-    { label: 'Blog', page: 'home' },
-    { label: 'Shop', page: 'home' },
-    { label: 'Contacts', page: 'home' },
+    { label: 'Collections', page: 'collections' },
   ];
 
   return (
@@ -60,8 +57,7 @@ export default function Footer({ onNavigate }: FooterProps) {
           </div>
           <div className="flex space-x-4">
             {/* placeholder icons for payment methods */}
-            <span className="font-semibold">PayPal</span>
-            <span className="font-semibold">VISA</span>
+            <span className="font-semibold">Designed and Developed by UrFlow</span>
           </div>
         </div>
       </div>
