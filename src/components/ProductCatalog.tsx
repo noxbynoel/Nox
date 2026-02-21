@@ -58,19 +58,22 @@ export default function ProductCatalog() {
 
   return (
     <div className="relative w-full">
-      <AlternateHero
-        products={products}
-        onProductClick={handleHeroItemClick}
-      />
-      <div ref={collectionsRef} id="collections" className="sticky top-0 z-0 h-screen">
-        <AlternateCollections
+      <div className="sticky top-0 z-0 w-full">
+        <AlternateHero
           products={products}
-          externalSelectedIndex={heroSelectedIndex}
-          onSelectionChange={setHeroSelectedIndex}
+          onProductClick={handleHeroItemClick}
         />
       </div>
-      <div className="relative z-10 w-full shadow-[0_-20px_50px_rgba(0,0,0,0.1)] dark:shadow-[0_-20px_50px_rgba(0,0,0,0.5)]">
+
+      <div className="relative z-10 w-full shadow-[0_-20px_50px_rgba(0,0,0,0.1)] dark:shadow-[0_-20px_50px_rgba(0,0,0,0.5)] bg-[#F6F6F6] dark:bg-[#121212]">
         <About />
+        <div ref={collectionsRef} id="collections" className="w-full">
+          <AlternateCollections
+            products={products}
+            externalSelectedIndex={heroSelectedIndex}
+            onSelectionChange={setHeroSelectedIndex}
+          />
+        </div>
       </div>
     </div>
   );
