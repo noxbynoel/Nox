@@ -58,7 +58,13 @@ export default function AlternateHero({ products, onProductClick, onShowAuth, on
                 <div className="flex flex-col items-end gap-4 mt-2 relative z-50">
                     {/* Header Controls */}
                     <div className="flex items-center gap-6 text-[10px] font-bold tracking-[0.15em] uppercase text-black/60 dark:text-white/60">
-                        <span onClick={() => onNavigate?.('home')} className="cursor-pointer hover:text-black dark:hover:text-white transition-colors">Collections</span>
+                        <span onClick={() => {
+                            if (onNavigate) onNavigate('home');
+                            setTimeout(() => {
+                                const el = document.getElementById('collections');
+                                if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                            }, 100);
+                        }} className="cursor-pointer hover:text-black dark:hover:text-white transition-colors">Collections</span>
 
 
                         <button onClick={toggleTheme} className="hover:text-black dark:hover:text-white transition-colors">
@@ -167,7 +173,13 @@ export default function AlternateHero({ products, onProductClick, onShowAuth, on
             {/* Footer Discover section */}
             <div className="max-w-[1400px] mx-auto px-6 lg:px-12 flex justify-between items-center text-[10px] font-bold tracking-[0.15em] uppercase text-black/40 dark:text-white/40 bg-white/50 dark:bg-[#0A0A0A]/80 p-4 border border-black/5 dark:border-white/10">
                 <span>{products.length} Products</span>
-                <span className="cursor-pointer hover:text-black dark:hover:text-white transition-colors">DISCOVER</span>
+                <span onClick={() => {
+                    if (onNavigate) onNavigate('home');
+                    setTimeout(() => {
+                        const el = document.getElementById('collections');
+                        if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                    }, 100);
+                }} className="cursor-pointer hover:text-black dark:hover:text-white transition-colors">DISCOVER</span>
             </div>
 
         </section>

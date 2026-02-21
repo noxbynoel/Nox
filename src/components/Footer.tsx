@@ -1,14 +1,21 @@
-import { useTheme } from '../contexts/ThemeContext';
+
 
 interface FooterProps {
   onNavigate?: (page: string) => void;
 }
 
 export default function Footer({ onNavigate }: FooterProps) {
-  const { theme } = useTheme();
-
   const handleNav = (page: string) => {
-    if (onNavigate) onNavigate(page);
+    if (page === 'collections') {
+      if (onNavigate) onNavigate('home');
+      setTimeout(() => {
+        const el = document.getElementById('collections');
+        if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }, 100);
+    } else {
+      if (onNavigate) onNavigate(page);
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
   };
 
   const links = [

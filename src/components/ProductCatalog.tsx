@@ -70,7 +70,7 @@ export default function ProductCatalog({ onShowAuth, onShowCart, onNavigate }: P
         onShowCart={onShowCart}
         onNavigate={onNavigate}
       />
-      <div ref={collectionsRef}>
+      <div ref={collectionsRef} id="collections">
         <AlternateCollections
           products={products}
           externalSelectedIndex={heroSelectedIndex}
