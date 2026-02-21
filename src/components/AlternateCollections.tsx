@@ -109,7 +109,7 @@ export default function AlternateCollections({ products, externalSelectedIndex =
                             Item {(selectedIndex + 1).toString().padStart(2, '0')} / {products.length.toString().padStart(2, '0')}
                         </p>
 
-                        <h2 style={{ fontFamily: 'Inter, sans-serif' }} className="text-4xl md:text-5xl lg:text-[4.5rem] font-black uppercase tracking-tighter mb-8 md:mb-12 leading-[0.85] break-words text-primary dark:text-white transition-colors duration-500">
+                        <h2 className="text-4xl md:text-5xl lg:text-[4.5rem] font-black uppercase tracking-tighter mb-8 md:mb-12 leading-[0.85] break-words text-primary dark:text-white transition-colors duration-500">
                             {selectedProduct.name}
                         </h2>
 

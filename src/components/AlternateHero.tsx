@@ -46,7 +46,7 @@ export default function AlternateHero({ products, onProductClick, onShowAuth, on
             {/* Header Layout Similar to BECANE Reference */}
             <div className="max-w-[1400px] mx-auto px-6 lg:px-12 flex justify-between items-start mb-16">
                 <div>
-                    <h2 className="text-4xl md:text-5xl font-black uppercase tracking-tighter mb-4" style={{ fontFamily: 'Inter, sans-serif' }}>
+                    <h2 className="text-4xl md:text-5xl font-black uppercase tracking-tighter mb-4">
                         NOX
                     </h2>
                     <div className="flex gap-4 text-[10px] font-bold tracking-[0.15em] text-black/40 dark:text-accent/40 uppercase">
@@ -108,7 +108,7 @@ export default function AlternateHero({ products, onProductClick, onShowAuth, on
                     <span className="text-[10px] md:text-xs tracking-[0.2em] font-bold text-black/40 dark:text-accent/40 uppercase">
                         COLLECTION 01 / 01
                     </span>
-                    <h1 style={{ fontFamily: 'Inter, sans-serif' }} className="text-5xl md:text-7xl lg:text-[6rem] font-black uppercase tracking-tighter leading-none">
+                    <h1 className="text-5xl md:text-7xl lg:text-[6rem] font-black uppercase tracking-tighter leading-none">
                         COLLECTION
                     </h1>
                 </div>

@@ -58,7 +58,7 @@ export default function UserProfile() {
 
     return (
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-            <h1 className="text-4xl font-serif font-bold text-primary dark:text-accent mb-8">
+            <h1 className="text-4xl font-black uppercase tracking-tighter text-primary dark:text-accent mb-8">
                 My Profile
             </h1>
 

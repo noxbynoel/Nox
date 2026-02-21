@@ -207,7 +207,7 @@ Thank you for your purchase!
 
   return (
     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-      <h1 className="text-4xl font-serif font-bold text-primary dark:text-accent mb-8">
+      <h1 className="text-4xl font-black uppercase tracking-tighter text-primary dark:text-accent mb-8">
         My Orders
       </h1>
 
@@ -247,7 +247,7 @@ Thank you for your purchase!
                         className="flex items-center space-x-2 px-4 py-2 bg-gray-200 dark:bg-primary text-gray-700 dark:text-gray-300 rounded-lg hover:bg-gray-300 dark:hover:bg-primary-dark transition-smooth"
                       >
                         <Download className="w-4 h-4" />
-                        <span className="text-sm">Proforma</span>
+                        <span className="text-[10px] font-bold tracking-[0.1em] uppercase">Proforma</span>
                       </button>
                     )}
 
@@ -259,7 +259,7 @@ Thank you for your purchase!
                           className="flex items-center space-x-2 px-4 py-2 bg-primary dark:bg-accent text-white dark:text-primary rounded-lg hover:bg-primary-light dark:hover:bg-accent-dark transition-smooth"
                         >
                           <Download className="w-4 h-4" />
-                          <span className="text-sm">Invoice</span>
+                          <span className="text-[10px] font-bold tracking-[0.1em] uppercase">Invoice</span>
                         </button>
                       )}
 
@@ -268,7 +268,7 @@ Thank you for your purchase!
                       className="flex items-center space-x-2 px-4 py-2 border border-gray-300 dark:border-primary text-gray-700 dark:text-gray-300 rounded-lg hover:bg-gray-50 dark:hover:bg-primary transition-smooth"
                     >
                       <MessageCircle className="w-4 h-4" />
-                      <span className="text-sm">Help</span>
+                      <span className="text-[10px] font-bold tracking-[0.1em] uppercase">Help</span>
                     </button>
                   </div>
                 </div>

@@ -77,7 +77,7 @@ export default function AuthModal({ mode, onClose, onSwitchMode }: AuthModalProp
       <div className="bg-white dark:bg-primary-light rounded-2xl shadow-2xl max-w-md w-full max-h-[90vh] overflow-y-auto transition-smooth">
         <div className="p-6">
           <div className="flex justify-between items-center mb-6">
-            <h2 className="text-2xl font-serif font-bold text-primary dark:text-accent">
+            <h2 className="text-2xl font-black uppercase tracking-tighter text-primary dark:text-accent">
               {mode === 'login' ? 'Welcome Back' : 'Create Account'}
             </h2>
             <button
@@ -97,7 +97,7 @@ export default function AuthModal({ mode, onClose, onSwitchMode }: AuthModalProp
           {mode === 'login' ? (
             <form onSubmit={handleLogin} className="space-y-4">
               <div>
-                <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+                <label className="block text-[10px] font-bold tracking-[0.2em] uppercase text-gray-700 dark:text-gray-300 mb-2">
                   Email
                 </label>
                 <input
@@ -125,17 +125,17 @@ export default function AuthModal({ mode, onClose, onSwitchMode }: AuthModalProp
               <button
                 type="submit"
                 disabled={loading}
-                className="w-full py-3 bg-primary dark:bg-accent text-white dark:text-primary font-medium rounded-lg hover:bg-primary-light dark:hover:bg-accent-dark transition-smooth disabled:opacity-50"
+                className="w-full py-3 bg-primary dark:bg-accent text-white dark:text-primary font-bold uppercase tracking-[0.2em] text-[10px] rounded-lg hover:bg-primary-light dark:hover:bg-accent-dark transition-smooth disabled:opacity-50"
               >
                 {loading ? 'Signing in...' : 'Sign In'}
               </button>
 
-              <p className="text-center text-sm text-gray-600 dark:text-gray-400">
+              <p className="text-center text-[10px] font-bold tracking-[0.2em] uppercase text-gray-600 dark:text-gray-400">
                 Don't have an account?{' '}
                 <button
                   type="button"
                   onClick={() => onSwitchMode('register')}
-                  className="text-primary dark:text-accent font-medium hover:underline"
+                  className="text-primary dark:text-accent font-bold hover:underline"
                 >
                   Sign up
                 </button>
@@ -277,7 +277,7 @@ export default function AuthModal({ mode, onClose, onSwitchMode }: AuthModalProp
                 <button
                   type="button"
                   onClick={() => onSwitchMode('login')}
-                  className="text-primary dark:text-accent font-medium hover:underline"
+                  className="text-primary dark:text-accent font-bold hover:underline"
                 >
                   Sign in
                 </button>

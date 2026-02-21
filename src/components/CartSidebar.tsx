@@ -23,7 +23,7 @@ export default function CartSidebar({ isOpen, onClose, onCheckout }: CartSidebar
 
       <div className="fixed right-0 top-0 h-full w-full max-w-md bg-white dark:bg-primary shadow-2xl z-50 flex flex-col transition-smooth">
         <div className="p-6 border-b border-gray-200 dark:border-primary-light flex justify-between items-center">
-          <h2 className="text-2xl font-serif font-bold text-primary dark:text-accent">
+          <h2 className="text-2xl font-black uppercase tracking-tighter text-primary dark:text-accent">
             Shopping Cart
           </h2>
           <button
@@ -94,22 +94,22 @@ export default function CartSidebar({ isOpen, onClose, onCheckout }: CartSidebar
         {items.length > 0 && (
           <div className="p-6 border-t border-gray-200 dark:border-primary-light">
             <div className="flex justify-between items-center mb-4">
-              <span className="text-lg font-medium text-gray-700 dark:text-gray-300">Total</span>
-              <span className="text-2xl font-bold text-primary dark:text-accent">
+              <span className="text-[10px] font-bold tracking-[0.2em] uppercase text-gray-700 dark:text-gray-300">Total</span>
+              <span className="text-2xl font-black uppercase tracking-tighter text-primary dark:text-accent">
                 ${getTotalPrice().toFixed(2)}
               </span>
             </div>
 
             <button
               onClick={onCheckout}
-              className="w-full py-4 bg-primary dark:bg-accent text-white dark:text-primary font-medium rounded-lg hover:bg-primary-light dark:hover:bg-accent-dark transition-smooth flex items-center justify-center space-x-2"
+              className="w-full py-4 bg-primary dark:bg-accent text-white dark:text-primary font-bold tracking-[0.2em] uppercase text-[10px] rounded-lg hover:bg-primary-light dark:hover:bg-accent-dark transition-smooth flex items-center justify-center space-x-2"
             >
               <MessageCircle className="w-5 h-5" />
               <span>Checkout via WhatsApp</span>
             </button>
 
             {!user && (
-              <p className="text-xs text-center text-gray-500 dark:text-gray-400 mt-3">
+              <p className="text-[10px] tracking-[0.1em] uppercase text-center text-gray-500 dark:text-gray-400 mt-3 font-bold">
                 Sign in to save your cart and track orders
               </p>
             )}

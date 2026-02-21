@@ -64,7 +64,7 @@ export default function ProductCatalog({ onShowAuth, onShowCart, onNavigate }: P
   return (
     <>
       <AlternateHero
-        products={products.slice(0, 10)}
+        products={products}
         onProductClick={handleHeroItemClick}
         onShowAuth={onShowAuth}
         onShowCart={onShowCart}
@@ -72,7 +72,7 @@ export default function ProductCatalog({ onShowAuth, onShowCart, onNavigate }: P
       />
       <div ref={collectionsRef}>
         <AlternateCollections
-          products={products.slice(0, 10)}
+          products={products}
           externalSelectedIndex={heroSelectedIndex}
           onSelectionChange={setHeroSelectedIndex}
         />

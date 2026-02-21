@@ -234,14 +234,14 @@ export default function Checkout({ onBack, onSuccess }: CheckoutProps) {
         <span>Back to Cart</span>
       </button>
 
-      <h1 className="text-4xl font-serif font-bold text-primary dark:text-accent mb-8">
+      <h1 className="text-4xl font-black uppercase tracking-tighter text-primary dark:text-accent mb-8">
         Checkout
       </h1>
 
       <div className="grid md:grid-cols-2 gap-8">
         <div>
           <div className="bg-white dark:bg-primary-light rounded-lg p-6 mb-6">
-            <h2 className="text-xl font-serif font-bold text-gray-900 dark:text-gray-100 mb-4">
+            <h2 className="text-xl font-black uppercase tracking-tighter text-gray-900 dark:text-gray-100 mb-4">
               Order Summary
             </h2>
 
@@ -312,7 +312,7 @@ export default function Checkout({ onBack, onSuccess }: CheckoutProps) {
 
         <div>
           <div className="bg-white dark:bg-primary-light rounded-lg p-6 mb-6">
-            <h2 className="text-xl font-serif font-bold text-gray-900 dark:text-gray-100 mb-4">
+            <h2 className="text-xl font-black uppercase tracking-tighter text-gray-900 dark:text-gray-100 mb-4">
               Shipping Information
             </h2>
 
@@ -348,7 +348,7 @@ export default function Checkout({ onBack, onSuccess }: CheckoutProps) {
           <button
             onClick={handleCheckout}
             disabled={loading || !user}
-            className="w-full py-4 bg-primary dark:bg-accent text-white dark:text-primary font-medium rounded-lg hover:bg-primary-light dark:hover:bg-accent-dark transition-smooth disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center space-x-2"
+            className="w-full py-4 bg-primary dark:bg-accent text-white dark:text-primary font-bold uppercase tracking-[0.2em] text-[10px] rounded-lg hover:bg-primary-light dark:hover:bg-accent-dark transition-smooth disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center space-x-2"
           >
             {loading ? (
               <span>Processing...</span>
