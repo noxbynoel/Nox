@@ -179,22 +179,51 @@ export default function UserProfile() {
                                 />
                             ) : (
                                 <h2 className="text-2xl font-black uppercase tracking-tight text-[#0f342b] dark:text-white mb-4">
-                                    {profile.name || 'SRADHYA'}
+                                    {profile.name || 'User'}
                                 </h2>
                             )}
 
-                            <div className="flex items-center justify-center text-gray-500 dark:text-accent/60 text-sm font-medium mb-12">
+                            <div className="flex items-center justify-center text-gray-500 dark:text-accent/60 text-sm font-medium mb-8">
                                 <Mail className="w-4 h-4 mr-2" />
-                                <span>{user.email || 'sradhyarenish@gmail.com'}</span>
+                                <span>{user.email || 'user@gmail.com'}</span>
                             </div>
 
-                            <div className="w-full pt-8 border-t border-gray-100 dark:border-accent/10 mt-auto text-left">
-                                <p className="text-[10px] tracking-[0.2em] font-bold text-gray-400 dark:text-accent/40 uppercase mb-4">
-                                    Verification Status
-                                </p>
-                                <div className="flex items-center space-x-2">
-                                    <div className="w-2 h-2 rounded-full bg-green-500" />
-                                    <span className="text-xs font-bold uppercase tracking-wider text-[#0f342b] dark:text-white">Active Clearance</span>
+                            <div className="w-full pt-6 border-t border-gray-100 dark:border-accent/10 mt-2 text-left">
+                                <h4 className="text-[10px] uppercase font-bold tracking-[0.2em] text-gray-400 dark:text-accent/50 mb-6">
+                                    Account Metrics
+                                </h4>
+                                <div className="space-y-4 mb-8">
+                                    <div className="flex items-center justify-between text-sm">
+                                        <div className="flex items-center text-gray-500 dark:text-accent/60">
+                                            <Package className="w-4 h-4 mr-3" />
+                                            <span>Total Orders</span>
+                                        </div>
+                                        <span className="font-bold text-[#0f342b] dark:text-white">
+                                            {orderCount === null ? (
+                                                <div className="w-4 h-4 border-2 border-[#0f342b] dark:border-white border-t-transparent rounded-full animate-spin"></div>
+                                            ) : (
+                                                orderCount
+                                            )}
+                                        </span>
+                                    </div>
+                                    <div className="flex items-center justify-between text-sm">
+                                        <div className="flex items-center text-gray-500 dark:text-accent/60">
+                                            <Clock className="w-4 h-4 mr-3" />
+                                            <span>Member Since</span>
+                                        </div>
+                                        <span className="font-bold text-[#0f342b] dark:text-white">
+                                            {new Date(user.metadata?.creationTime || Date.now()).getFullYear()}
+                                        </span>
+                                    </div>
+                                </div>
+                                <div className="pt-6 mt-6 border-t border-gray-100 dark:border-accent/10">
+                                    <p className="text-[10px] tracking-[0.2em] font-bold text-gray-400 dark:text-accent/40 uppercase mb-4">
+                                        Verification Status
+                                    </p>
+                                    <div className="flex items-center space-x-2">
+                                        <div className="w-2 h-2 rounded-full bg-green-500 animate-pulse" />
+                                        <span className="text-xs font-bold uppercase tracking-wider text-[#0f342b] dark:text-white">Active Clearance</span>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -237,7 +266,7 @@ export default function UserProfile() {
                         </div>
 
                         {/* Logistics Card */}
-                        <div className="bg-white dark:bg-[#0a0a0a] border border-gray-100 dark:border-accent/10 p-8 shadow-[0_8px_30px_rgb(0,0,0,0.04)] dark:shadow-[0_8px_30px_rgba(0,0,0,0.5)] flex-grow">
+                        <div className="bg-white dark:bg-[#0a0a0a] border border-gray-100 dark:border-accent/10 p-8 shadow-[0_8px_30px_rgb(0,0,0,0.04)] dark:shadow-[0_8px_30px_rgba(0,0,0,0.5)]">
                             <div className="flex items-center justify-between mb-6 pb-6 border-b border-gray-100 dark:border-accent/10">
                                 <div className="flex items-center">
                                     <MapPin className="w-4 h-4 text-gray-400 dark:text-accent/50 mr-4" />
@@ -292,6 +321,21 @@ export default function UserProfile() {
                                         </div>
                                         <div>
                                             <label className="block text-[10px] uppercase font-bold tracking-[0.2em] text-gray-400 dark:text-accent/50 mb-2">
+                                                State / Province
+                                            </label>
+                                            <input
+                                                type="text"
+                                                value={formData.shipping_address.state}
+                                                onChange={(e) => setFormData({
+                                                    ...formData,
+                                                    shipping_address: { ...formData.shipping_address, state: e.target.value }
+                                                })}
+                                                placeholder="NY"
+                                                className={inputClasses}
+                                            />
+                                        </div>
+                                        <div>
+                                            <label className="block text-[10px] uppercase font-bold tracking-[0.2em] text-gray-400 dark:text-accent/50 mb-2">
                                                 Postal Code
                                             </label>
                                             <input
@@ -305,6 +349,21 @@ export default function UserProfile() {
                                                 className={inputClasses}
                                             />
                                         </div>
+                                        <div>
+                                            <label className="block text-[10px] uppercase font-bold tracking-[0.2em] text-gray-400 dark:text-accent/50 mb-2">
+                                                Country
+                                            </label>
+                                            <input
+                                                type="text"
+                                                value={formData.shipping_address.country}
+                                                onChange={(e) => setFormData({
+                                                    ...formData,
+                                                    shipping_address: { ...formData.shipping_address, country: e.target.value }
+                                                })}
+                                                placeholder="United States"
+                                                className={inputClasses}
+                                            />
+                                        </div>
                                     </div>
                                 </div>
                             ) : (
@@ -313,13 +372,21 @@ export default function UserProfile() {
                                         <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
                                             <div>
                                                 <p className="text-[10px] uppercase font-bold tracking-[0.2em] text-gray-400 dark:text-accent/50 mb-2">Street</p>
-                                                <p className="text-sm font-medium text-[#0f342b] dark:text-gray-300">{profile.shipping_address.street}</p>
+                                                <p className="text-sm font-medium text-[#0f342b] dark:text-gray-300 break-words">{profile.shipping_address.street}</p>
                                             </div>
                                             <div>
-                                                <p className="text-[10px] uppercase font-bold tracking-[0.2em] text-gray-400 dark:text-accent/50 mb-2">City / Postal</p>
-                                                <p className="text-sm font-medium text-[#0f342b] dark:text-gray-300">
-                                                    {profile.shipping_address.city} {profile.shipping_address.zip}
+                                                <p className="text-[10px] uppercase font-bold tracking-[0.2em] text-gray-400 dark:text-accent/50 mb-2">City / Region</p>
+                                                <p className="text-sm font-medium text-[#0f342b] dark:text-gray-300 break-words">
+                                                    {profile.shipping_address.city}{profile.shipping_address.state ? `, ${profile.shipping_address.state}` : ''}
                                                 </p>
+                                            </div>
+                                            <div>
+                                                <p className="text-[10px] uppercase font-bold tracking-[0.2em] text-gray-400 dark:text-accent/50 mb-2">Postal Code</p>
+                                                <p className="text-sm font-medium text-[#0f342b] dark:text-gray-300">{profile.shipping_address.zip || '—'}</p>
+                                            </div>
+                                            <div>
+                                                <p className="text-[10px] uppercase font-bold tracking-[0.2em] text-gray-400 dark:text-accent/50 mb-2">Country</p>
+                                                <p className="text-sm font-medium text-[#0f342b] dark:text-gray-300">{profile.shipping_address.country || '—'}</p>
                                             </div>
                                         </div>
                                     ) : (
