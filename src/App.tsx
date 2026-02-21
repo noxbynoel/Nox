@@ -56,7 +56,7 @@ function App() {
           onSuccess={handleCheckoutSuccess}
         />
       )}
-      {currentPage === 'dashboard' && <Dashboard />}
+      {currentPage === 'dashboard' && <Dashboard onNavigate={(page) => setCurrentPage(page as Page)} />}
       {currentPage === 'profile' && <UserProfile />}
 
       {showAuth && (
