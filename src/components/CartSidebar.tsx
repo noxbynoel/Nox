@@ -21,7 +21,7 @@ export default function CartSidebar({ isOpen, onClose, onCheckout }: CartSidebar
         onClick={onClose}
       />
 
-      <div className="fixed right-0 top-0 h-full w-full max-w-md bg-white dark:bg-[#363636] shadow-2xl z-50 flex flex-col transition-smooth">
+      <div className="fixed right-0 top-0 h-full w-full max-w-md bg-white dark:bg-[#121212] shadow-2xl z-50 flex flex-col transition-smooth">
         <div className="p-6 border-b border-gray-200 dark:border-[#4A4A4A] flex justify-between items-center">
           <h2 className="text-2xl font-black uppercase tracking-tighter text-primary dark:text-white">
             Shopping Cart
@@ -44,7 +44,7 @@ export default function CartSidebar({ isOpen, onClose, onCheckout }: CartSidebar
               {items.map((item) => (
                 <div
                   key={item.product_id}
-                  className="flex gap-4 p-4 bg-gray-50 dark:bg-[#424242] rounded-lg"
+                  className="flex gap-4 p-4 bg-gray-50 dark:bg-[#1A1A1A] rounded-lg"
                 >
                   <img
                     src={item.product?.primary_image}

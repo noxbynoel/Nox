@@ -74,7 +74,7 @@ export default function AuthModal({ mode, onClose, onSwitchMode }: AuthModalProp
 
   return (
     <div className="fixed inset-0 bg-black bg-opacity-50 z-50 flex items-center justify-center p-4">
-      <div className="bg-white dark:bg-[#424242] rounded-2xl shadow-2xl max-w-md w-full max-h-[90vh] overflow-y-auto transition-smooth">
+      <div className="bg-white dark:bg-[#1A1A1A] rounded-2xl shadow-2xl max-w-md w-full max-h-[90vh] overflow-y-auto transition-smooth">
         <div className="p-6">
           <div className="flex justify-between items-center mb-6">
             <h2 className="text-2xl font-black uppercase tracking-tighter text-primary dark:text-white">
@@ -105,7 +105,7 @@ export default function AuthModal({ mode, onClose, onSwitchMode }: AuthModalProp
                   required
                   value={loginData.email}
                   onChange={(e) => setLoginData({ ...loginData, email: e.target.value })}
-                  className="w-full px-4 py-2 border border-gray-300 dark:border-[#4A4A4A] rounded-lg focus:ring-2 focus:ring-primary dark:focus:ring-white focus:border-transparent bg-white dark:bg-[#363636] text-gray-900 dark:text-gray-100 transition-smooth"
+                  className="w-full px-4 py-2 border border-gray-300 dark:border-[#4A4A4A] rounded-lg focus:ring-2 focus:ring-primary dark:focus:ring-white focus:border-transparent bg-white dark:bg-[#121212] text-gray-900 dark:text-gray-100 transition-smooth"
                 />
               </div>
 
@@ -118,7 +118,7 @@ export default function AuthModal({ mode, onClose, onSwitchMode }: AuthModalProp
                   required
                   value={loginData.password}
                   onChange={(e) => setLoginData({ ...loginData, password: e.target.value })}
-                  className="w-full px-4 py-2 border border-gray-300 dark:border-[#4A4A4A] rounded-lg focus:ring-2 focus:ring-primary dark:focus:ring-white focus:border-transparent bg-white dark:bg-[#363636] text-gray-900 dark:text-gray-100 transition-smooth"
+                  className="w-full px-4 py-2 border border-gray-300 dark:border-[#4A4A4A] rounded-lg focus:ring-2 focus:ring-primary dark:focus:ring-white focus:border-transparent bg-white dark:bg-[#121212] text-gray-900 dark:text-gray-100 transition-smooth"
                 />
               </div>
 
@@ -152,7 +152,7 @@ export default function AuthModal({ mode, onClose, onSwitchMode }: AuthModalProp
                   required
                   value={registerData.name}
                   onChange={(e) => setRegisterData({ ...registerData, name: e.target.value })}
-                  className="w-full px-4 py-2 border border-gray-300 dark:border-[#4A4A4A] rounded-lg focus:ring-2 focus:ring-primary dark:focus:ring-white focus:border-transparent bg-white dark:bg-[#363636] text-gray-900 dark:text-gray-100 transition-smooth"
+                  className="w-full px-4 py-2 border border-gray-300 dark:border-[#4A4A4A] rounded-lg focus:ring-2 focus:ring-primary dark:focus:ring-white focus:border-transparent bg-white dark:bg-[#121212] text-gray-900 dark:text-gray-100 transition-smooth"
                 />
               </div>
 
@@ -165,7 +165,7 @@ export default function AuthModal({ mode, onClose, onSwitchMode }: AuthModalProp
                   required
                   value={registerData.email}
                   onChange={(e) => setRegisterData({ ...registerData, email: e.target.value })}
-                  className="w-full px-4 py-2 border border-gray-300 dark:border-[#4A4A4A] rounded-lg focus:ring-2 focus:ring-primary dark:focus:ring-white focus:border-transparent bg-white dark:bg-[#363636] text-gray-900 dark:text-gray-100 transition-smooth"
+                  className="w-full px-4 py-2 border border-gray-300 dark:border-[#4A4A4A] rounded-lg focus:ring-2 focus:ring-primary dark:focus:ring-white focus:border-transparent bg-white dark:bg-[#121212] text-gray-900 dark:text-gray-100 transition-smooth"
                 />
               </div>
 
@@ -178,7 +178,7 @@ export default function AuthModal({ mode, onClose, onSwitchMode }: AuthModalProp
                   required
                   value={registerData.password}
                   onChange={(e) => setRegisterData({ ...registerData, password: e.target.value })}
-                  className="w-full px-4 py-2 border border-gray-300 dark:border-[#4A4A4A] rounded-lg focus:ring-2 focus:ring-primary dark:focus:ring-white focus:border-transparent bg-white dark:bg-[#363636] text-gray-900 dark:text-gray-100 transition-smooth"
+                  className="w-full px-4 py-2 border border-gray-300 dark:border-[#4A4A4A] rounded-lg focus:ring-2 focus:ring-primary dark:focus:ring-white focus:border-transparent bg-white dark:bg-[#121212] text-gray-900 dark:text-gray-100 transition-smooth"
                 />
               </div>
 
@@ -191,7 +191,7 @@ export default function AuthModal({ mode, onClose, onSwitchMode }: AuthModalProp
                   required
                   value={registerData.phone}
                   onChange={(e) => setRegisterData({ ...registerData, phone: e.target.value })}
-                  className="w-full px-4 py-2 border border-gray-300 dark:border-[#4A4A4A] rounded-lg focus:ring-2 focus:ring-primary dark:focus:ring-white focus:border-transparent bg-white dark:bg-[#363636] text-gray-900 dark:text-gray-100 transition-smooth"
+                  className="w-full px-4 py-2 border border-gray-300 dark:border-[#4A4A4A] rounded-lg focus:ring-2 focus:ring-primary dark:focus:ring-white focus:border-transparent bg-white dark:bg-[#121212] text-gray-900 dark:text-gray-100 transition-smooth"
                 />
               </div>
 
@@ -204,7 +204,7 @@ export default function AuthModal({ mode, onClose, onSwitchMode }: AuthModalProp
                   required
                   value={registerData.street}
                   onChange={(e) => setRegisterData({ ...registerData, street: e.target.value })}
-                  className="w-full px-4 py-2 border border-gray-300 dark:border-[#4A4A4A] rounded-lg focus:ring-2 focus:ring-primary dark:focus:ring-white focus:border-transparent bg-white dark:bg-[#363636] text-gray-900 dark:text-gray-100 transition-smooth"
+                  className="w-full px-4 py-2 border border-gray-300 dark:border-[#4A4A4A] rounded-lg focus:ring-2 focus:ring-primary dark:focus:ring-white focus:border-transparent bg-white dark:bg-[#121212] text-gray-900 dark:text-gray-100 transition-smooth"
                 />
               </div>
 
@@ -218,7 +218,7 @@ export default function AuthModal({ mode, onClose, onSwitchMode }: AuthModalProp
                     required
                     value={registerData.city}
                     onChange={(e) => setRegisterData({ ...registerData, city: e.target.value })}
-                    className="w-full px-4 py-2 border border-gray-300 dark:border-[#4A4A4A] rounded-lg focus:ring-2 focus:ring-primary dark:focus:ring-white focus:border-transparent bg-white dark:bg-[#363636] text-gray-900 dark:text-gray-100 transition-smooth"
+                    className="w-full px-4 py-2 border border-gray-300 dark:border-[#4A4A4A] rounded-lg focus:ring-2 focus:ring-primary dark:focus:ring-white focus:border-transparent bg-white dark:bg-[#121212] text-gray-900 dark:text-gray-100 transition-smooth"
                   />
                 </div>
 
@@ -231,7 +231,7 @@ export default function AuthModal({ mode, onClose, onSwitchMode }: AuthModalProp
                     required
                     value={registerData.state}
                     onChange={(e) => setRegisterData({ ...registerData, state: e.target.value })}
-                    className="w-full px-4 py-2 border border-gray-300 dark:border-[#4A4A4A] rounded-lg focus:ring-2 focus:ring-primary dark:focus:ring-white focus:border-transparent bg-white dark:bg-[#363636] text-gray-900 dark:text-gray-100 transition-smooth"
+                    className="w-full px-4 py-2 border border-gray-300 dark:border-[#4A4A4A] rounded-lg focus:ring-2 focus:ring-primary dark:focus:ring-white focus:border-transparent bg-white dark:bg-[#121212] text-gray-900 dark:text-gray-100 transition-smooth"
                   />
                 </div>
               </div>
@@ -246,7 +246,7 @@ export default function AuthModal({ mode, onClose, onSwitchMode }: AuthModalProp
                     required
                     value={registerData.zip}
                     onChange={(e) => setRegisterData({ ...registerData, zip: e.target.value })}
-                    className="w-full px-4 py-2 border border-gray-300 dark:border-[#4A4A4A] rounded-lg focus:ring-2 focus:ring-primary dark:focus:ring-white focus:border-transparent bg-white dark:bg-[#363636] text-gray-900 dark:text-gray-100 transition-smooth"
+                    className="w-full px-4 py-2 border border-gray-300 dark:border-[#4A4A4A] rounded-lg focus:ring-2 focus:ring-primary dark:focus:ring-white focus:border-transparent bg-white dark:bg-[#121212] text-gray-900 dark:text-gray-100 transition-smooth"
                   />
                 </div>
 
@@ -259,7 +259,7 @@ export default function AuthModal({ mode, onClose, onSwitchMode }: AuthModalProp
                     required
                     value={registerData.country}
                     onChange={(e) => setRegisterData({ ...registerData, country: e.target.value })}
-                    className="w-full px-4 py-2 border border-gray-300 dark:border-[#4A4A4A] rounded-lg focus:ring-2 focus:ring-primary dark:focus:ring-white focus:border-transparent bg-white dark:bg-[#363636] text-gray-900 dark:text-gray-100 transition-smooth"
+                    className="w-full px-4 py-2 border border-gray-300 dark:border-[#4A4A4A] rounded-lg focus:ring-2 focus:ring-primary dark:focus:ring-white focus:border-transparent bg-white dark:bg-[#121212] text-gray-900 dark:text-gray-100 transition-smooth"
                   />
                 </div>
               </div>

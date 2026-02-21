@@ -217,7 +217,7 @@ Thank you for your purchase!
         </h1>
         <button
           onClick={() => onNavigate?.('home')}
-          className="px-4 py-2 bg-gray-200 dark:bg-[#363636] text-gray-700 dark:text-gray-300 rounded-lg hover:bg-gray-300 dark:hover:bg-[#282828] transition-smooth"
+          className="px-4 py-2 bg-gray-200 dark:bg-[#121212] text-gray-700 dark:text-gray-300 rounded-lg hover:bg-gray-300 dark:hover:bg-[#282828] transition-smooth"
         >
           Back to Home
         </button>
@@ -233,7 +233,7 @@ Thank you for your purchase!
           {orders.map((order) => (
             <div
               key={order.id}
-              className="bg-white dark:bg-[#424242] rounded-lg shadow-md overflow-hidden"
+              className="bg-white dark:bg-[#1A1A1A] rounded-lg shadow-md overflow-hidden"
             >
               <div className="p-6">
                 <div className="flex flex-col md:flex-row justify-between items-start md:items-center mb-6 gap-4">
@@ -256,7 +256,7 @@ Thank you for your purchase!
                     {order.status === 'pending_payment' && (
                       <button
                         onClick={() => downloadProformaInvoice(order)}
-                        className="flex items-center space-x-2 px-4 py-2 bg-gray-200 dark:bg-[#363636] text-gray-700 dark:text-gray-300 rounded-lg hover:bg-gray-300 dark:hover:bg-[#282828] transition-smooth"
+                        className="flex items-center space-x-2 px-4 py-2 bg-gray-200 dark:bg-[#121212] text-gray-700 dark:text-gray-300 rounded-lg hover:bg-gray-300 dark:hover:bg-[#282828] transition-smooth"
                       >
                         <Download className="w-4 h-4" />
                         <span className="text-[10px] font-bold tracking-[0.1em] uppercase">Proforma</span>
@@ -293,7 +293,7 @@ Thank you for your purchase!
                         {getProgressPercentage(order.status)}%
                       </div>
                     </div>
-                    <div className="overflow-hidden h-2 text-xs flex rounded-full bg-gray-200 dark:bg-[#363636]">
+                    <div className="overflow-hidden h-2 text-xs flex rounded-full bg-gray-200 dark:bg-[#121212]">
                       <div
                         style={{ width: `${getProgressPercentage(order.status)}%` }}
                         className="transition-smooth shadow-none flex flex-col text-center whitespace-nowrap text-white justify-center bg-primary dark:bg-white"

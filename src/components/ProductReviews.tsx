@@ -121,7 +121,7 @@ export default function ProductReviews({ productId, onReviewAdded }: ProductRevi
 
             {/* Add Review Form */}
             {user ? (
-                <form onSubmit={handleSubmit} className="mb-8 bg-gray-50 dark:bg-[#363636] p-6 rounded-lg">
+                <form onSubmit={handleSubmit} className="mb-8 bg-gray-50 dark:bg-[#121212] p-6 rounded-lg">
                     <h4 className="font-medium text-gray-900 dark:text-gray-100 mb-4">Write a Review</h4>
 
                     <div className="flex items-center mb-4">
@@ -152,7 +152,7 @@ export default function ProductReviews({ productId, onReviewAdded }: ProductRevi
                             placeholder="Share your thoughts about this product..."
                             required
                             rows={3}
-                            className="w-full px-4 py-2 border border-gray-300 dark:border-[#4A4A4A] rounded-lg focus:ring-2 focus:ring-primary dark:focus:ring-white bg-white dark:bg-[#424242] text-gray-900 dark:text-gray-100"
+                            className="w-full px-4 py-2 border border-gray-300 dark:border-[#4A4A4A] rounded-lg focus:ring-2 focus:ring-primary dark:focus:ring-white bg-white dark:bg-[#1A1A1A] text-gray-900 dark:text-gray-100"
                         />
                     </div>
 
@@ -165,7 +165,7 @@ export default function ProductReviews({ productId, onReviewAdded }: ProductRevi
                     </button>
                 </form>
             ) : (
-                <div className="mb-8 p-4 bg-gray-50 dark:bg-[#363636] rounded-lg text-center">
+                <div className="mb-8 p-4 bg-gray-50 dark:bg-[#121212] rounded-lg text-center">
                     <p className="text-gray-600 dark:text-gray-400">
                         Please sign in to write a review.
                     </p>
@@ -187,7 +187,7 @@ export default function ProductReviews({ productId, onReviewAdded }: ProductRevi
                         <div key={review.id} className="border-b border-gray-100 dark:border-[#4A4A4A] pb-6 last:border-0">
                             <div className="flex justify-between items-start mb-2">
                                 <div className="flex items-center">
-                                    <div className="w-8 h-8 rounded-full bg-gray-200 dark:bg-[#363636] mr-3 flex items-center justify-center">
+                                    <div className="w-8 h-8 rounded-full bg-gray-200 dark:bg-[#121212] mr-3 flex items-center justify-center">
                                         <User className="w-4 h-4 text-gray-500" />
                                     </div>
                                     <div>

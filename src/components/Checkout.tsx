@@ -241,7 +241,7 @@ export default function Checkout({ onBack, onSuccess }: CheckoutProps) {
       <div className="flex flex-col md:flex-row gap-8 lg:gap-12 w-full">
         {/* Left Column - Order Summary & Discount */}
         <div className="w-full md:w-1/2 flex flex-col space-y-6">
-          <div className="bg-white dark:bg-[#424242] rounded-lg p-6 shadow-sm border border-gray-100 dark:border-[#4A4A4A]">
+          <div className="bg-white dark:bg-[#1A1A1A] rounded-lg p-6 shadow-sm border border-gray-100 dark:border-[#4A4A4A]">
             <h2 className="text-xl font-black uppercase tracking-tighter text-gray-900 dark:text-gray-100 mb-6">
               Order Summary
             </h2>
@@ -291,7 +291,7 @@ export default function Checkout({ onBack, onSuccess }: CheckoutProps) {
             </div>
           </div>
 
-          <div className="bg-white dark:bg-[#424242] rounded-lg p-6 shadow-sm border border-gray-100 dark:border-[#4A4A4A]">
+          <div className="bg-white dark:bg-[#1A1A1A] rounded-lg p-6 shadow-sm border border-gray-100 dark:border-[#4A4A4A]">
             <h3 className="font-bold text-xs tracking-[0.1em] uppercase text-gray-900 dark:text-gray-100 mb-4">
               Discount Code
             </h3>
@@ -301,7 +301,7 @@ export default function Checkout({ onBack, onSuccess }: CheckoutProps) {
                 value={discountCode}
                 onChange={(e) => setDiscountCode(e.target.value.toUpperCase())}
                 placeholder="Enter code"
-                className="w-full sm:flex-1 px-4 py-3 border border-gray-300 dark:border-[#4A4A4A] rounded-lg focus:ring-2 focus:ring-primary dark:focus:ring-white bg-gray-50 dark:bg-[#363636] text-gray-900 dark:text-gray-100 transition-smooth text-sm outline-none"
+                className="w-full sm:flex-1 px-4 py-3 border border-gray-300 dark:border-[#4A4A4A] rounded-lg focus:ring-2 focus:ring-primary dark:focus:ring-white bg-gray-50 dark:bg-[#121212] text-gray-900 dark:text-gray-100 transition-smooth text-sm outline-none"
               />
               <button
                 onClick={handleApplyDiscount}
@@ -315,7 +315,7 @@ export default function Checkout({ onBack, onSuccess }: CheckoutProps) {
 
         {/* Right Column - Shipping & Payment */}
         <div className="w-full md:w-1/2 flex flex-col space-y-6">
-          <div className="bg-white dark:bg-[#424242] rounded-lg p-6 shadow-sm border border-gray-100 dark:border-[#4A4A4A] h-full md:min-h-[200px]">
+          <div className="bg-white dark:bg-[#1A1A1A] rounded-lg p-6 shadow-sm border border-gray-100 dark:border-[#4A4A4A] h-full md:min-h-[200px]">
             <h2 className="text-xl font-black uppercase tracking-tighter text-gray-900 dark:text-gray-100 mb-6">
               Shipping Information
             </h2>

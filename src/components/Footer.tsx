@@ -20,7 +20,7 @@ export default function Footer({ onNavigate }: FooterProps) {
   ];
 
   return (
-    <footer className="bg-gray-100 dark:bg-[#424242] border-t border-gray-200 dark:border-[#4A4A4A] transition-smooth">
+    <footer className="bg-gray-100 dark:bg-[#1A1A1A] border-t border-gray-200 dark:border-[#4A4A4A] transition-smooth">
       {/* top section */}
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
         <div className="flex flex-col md:flex-row justify-between">
@@ -53,7 +53,7 @@ export default function Footer({ onNavigate }: FooterProps) {
       </div>
 
       {/* bottom bar with copyright and payment logos */}
-      <div className="bg-gray-200 dark:bg-[#363636] border-t border-gray-300 dark:border-[#4A4A4A]">
+      <div className="bg-gray-200 dark:bg-[#121212] border-t border-gray-300 dark:border-[#4A4A4A]">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 flex flex-col md:flex-row justify-between items-center text-xs text-gray-600 dark:text-gray-400">
           <div className="mb-2 md:mb-0">
             &copy; {new Date().getFullYear()} NOX Inc. All rights reserved.

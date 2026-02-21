@@ -32,7 +32,7 @@ export default function AlternateHero({ products, onProductClick, onShowAuth, on
 
     if (!products || products.length === 0) {
         return (
-            <div className="h-[60vh] flex items-center justify-center bg-gray-50 dark:bg-[#363636] transition-colors duration-500">
+            <div className="h-[60vh] flex items-center justify-center bg-gray-50 dark:bg-[#121212] transition-colors duration-500">
                 <div className="animate-pulse text-gray-500 dark:text-white/60 tracking-[0.2em] uppercase text-xs font-bold">
                     Loading...
                 </div>
@@ -41,7 +41,7 @@ export default function AlternateHero({ products, onProductClick, onShowAuth, on
     }
 
     return (
-        <section className="w-full bg-[#F6F6F6] dark:bg-[#363636] overflow-hidden font-sans text-[#111] dark:text-white transition-colors duration-500 select-none pb-12 pt-8">
+        <section className="w-full bg-[#F6F6F6] dark:bg-[#121212] overflow-hidden font-sans text-[#111] dark:text-white transition-colors duration-500 select-none pb-12 pt-8">
 
             {/* Header Layout Similar to BECANE Reference */}
             <div className="max-w-[1400px] mx-auto px-6 lg:px-12 flex justify-between items-start mb-16">
@@ -72,7 +72,7 @@ export default function AlternateHero({ products, onProductClick, onShowAuth, on
                                     <span>{profile.name}</span>
                                 </button>
                                 {showMenu && (
-                                    <div className="absolute right-0 mt-4 w-48 bg-white dark:bg-[#424242] border border-black/5 dark:border-white/10 shadow-lg py-4 flex flex-col items-start px-4 gap-4 z-50">
+                                    <div className="absolute right-0 mt-4 w-48 bg-white dark:bg-[#1A1A1A] border border-black/5 dark:border-white/10 shadow-lg py-4 flex flex-col items-start px-4 gap-4 z-50">
                                         <button onClick={() => { onNavigate?.('dashboard'); setShowMenu(false); }} className="w-full text-left hover:text-black dark:hover:text-white transition-colors uppercase tracking-[0.15em] text-[10px] font-bold">My Orders</button>
                                         <button onClick={() => { onNavigate?.('profile'); setShowMenu(false); }} className="w-full text-left hover:text-black dark:hover:text-white transition-colors uppercase tracking-[0.15em] text-[10px] font-bold">Profile</button>
                                         <button onClick={async () => { await signOut(); setShowMenu(false); }} className="w-full text-left text-red-500 hover:text-red-700 transition-colors uppercase tracking-[0.15em] text-[10px] font-bold">Sign Out</button>
@@ -88,7 +88,7 @@ export default function AlternateHero({ products, onProductClick, onShowAuth, on
 
                     {/* Collection and Cart Context */}
                     <div className="flex items-center gap-6">
-                        <div className="hidden md:flex items-center gap-4 bg-white dark:bg-[#282828] px-4 py-2 border border-black/5 dark:border-white/10 shadow-sm text-[10px] font-bold tracking-[0.15em] uppercase text-black/60 dark:text-white/60">
+                        <div className="hidden md:flex items-center gap-4 bg-white dark:bg-[#0A0A0A] px-4 py-2 border border-black/5 dark:border-white/10 shadow-sm text-[10px] font-bold tracking-[0.15em] uppercase text-black/60 dark:text-white/60">
                             <span>Collection</span>
                             <span>01 / 01</span>
                         </div>
@@ -152,7 +152,7 @@ export default function AlternateHero({ products, onProductClick, onShowAuth, on
                                 src={p.primary_image}
                                 alt={p.name}
                                 draggable={false}
-                                className="w-full h-[180px] object-contain drop-shadow-xl dark:drop-shadow-[0_20px_20px_rgba(255,237,168,0.05)] transition-transform duration-500 group-hover:scale-125 group-hover:-translate-y-4"
+                                className="w-full h-[180px] object-contain drop-shadow-xl dark:drop-shadow-[0_20px_20px_rgba(255,255,255,0.05)] transition-transform duration-500 group-hover:scale-125 group-hover:-translate-y-4"
                             />
                             <div className="mt-6 text-center">
                                 <span className="text-[10px] sm:text-xs font-bold uppercase tracking-[0.2em] text-primary dark:text-white transition-colors duration-300">
@@ -165,7 +165,7 @@ export default function AlternateHero({ products, onProductClick, onShowAuth, on
             </div>
 
             {/* Footer Discover section */}
-            <div className="max-w-[1400px] mx-auto px-6 lg:px-12 flex justify-between items-center text-[10px] font-bold tracking-[0.15em] uppercase text-black/40 dark:text-white/40 bg-white/50 dark:bg-[#282828]/80 p-4 border border-black/5 dark:border-white/10">
+            <div className="max-w-[1400px] mx-auto px-6 lg:px-12 flex justify-between items-center text-[10px] font-bold tracking-[0.15em] uppercase text-black/40 dark:text-white/40 bg-white/50 dark:bg-[#0A0A0A]/80 p-4 border border-black/5 dark:border-white/10">
                 <span>{products.length} Products</span>
                 <span className="cursor-pointer hover:text-black dark:hover:text-white transition-colors">DISCOVER</span>
             </div>

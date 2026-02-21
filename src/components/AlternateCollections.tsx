@@ -85,7 +85,7 @@ export default function AlternateCollections({ products, externalSelectedIndex =
 
     if (!products || products.length === 0) {
         return (
-            <div className="h-[85vh] flex items-center justify-center bg-gray-50 dark:bg-[#363636] transition-colors duration-500">
+            <div className="h-[85vh] flex items-center justify-center bg-gray-50 dark:bg-[#121212] transition-colors duration-500">
                 <div className="animate-pulse text-gray-500 dark:text-white/60 tracking-[0.2em] uppercase text-xs font-bold">
                     Loading Collection...
                 </div>
@@ -104,10 +104,10 @@ export default function AlternateCollections({ products, externalSelectedIndex =
 
     return (
         <>
-            <section className="relative w-full h-[100vh] min-h-[800px] bg-gray-50 dark:bg-[#363636] overflow-hidden font-sans text-primary dark:text-white flex flex-col md:flex-row border-b border-gray-200 dark:border-white/10 transition-colors duration-500 select-none">
+            <section className="relative w-full h-[100vh] min-h-[800px] bg-gray-50 dark:bg-[#121212] overflow-hidden font-sans text-primary dark:text-white flex flex-col md:flex-row border-b border-gray-200 dark:border-white/10 transition-colors duration-500 select-none">
 
                 {/* LEFT PANEL */}
-                <div className="w-full md:w-[35%] lg:w-[30%] h-[40%] md:h-full p-8 md:p-16 flex flex-col justify-center relative z-20 border-b md:border-b-0 md:border-r border-gray-200 dark:border-white/10 bg-gray-50 dark:bg-[#363636] shadow-[10px_0_30px_-10px_rgba(0,0,0,0.05)] dark:shadow-[10px_0_30px_-10px_rgba(0,0,0,0.5)] transition-colors duration-500">
+                <div className="w-full md:w-[35%] lg:w-[30%] h-[40%] md:h-full p-8 md:p-16 flex flex-col justify-center relative z-20 border-b md:border-b-0 md:border-r border-gray-200 dark:border-white/10 bg-gray-50 dark:bg-[#121212] shadow-[10px_0_30px_-10px_rgba(0,0,0,0.05)] dark:shadow-[10px_0_30px_-10px_rgba(0,0,0,0.5)] transition-colors duration-500">
                     <AnimatePresence mode="wait">
                         <motion.div
                             key={selectedProduct.id}
@@ -242,7 +242,7 @@ export default function AlternateCollections({ products, externalSelectedIndex =
                                         whileInView={{ opacity: 1, y: 0 }}
                                         viewport={{ once: true, margin: "-100px" }}
                                         transition={{ duration: 0.7, delay: idx * 0.15, ease: "easeOut" }}
-                                        className="group relative aspect-[4/5] overflow-hidden bg-gray-100 dark:bg-[#363636]/50 shadow-sm"
+                                        className="group relative aspect-[4/5] overflow-hidden bg-gray-100 dark:bg-[#121212]/50 shadow-sm"
                                     >
                                         <img
                                             src={image}

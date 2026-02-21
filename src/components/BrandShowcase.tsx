@@ -34,7 +34,7 @@ export default function BrandShowcase() {
         <section
             ref={containerRef}
             onMouseMove={handleMouseMove}
-            className="relative w-full bg-[#003631] text-accent font-serif overflow-hidden select-none isolate"
+            className="relative w-full bg-[#003631] dark:bg-[#121212] text-accent dark:text-white font-serif overflow-hidden select-none isolate"
             style={{ height: isMobile ? 'auto' : '140vh' }} // Taller to fit the elongated layout comfortably
         >
             {/* Background Ambience */}
@@ -110,14 +110,14 @@ export default function BrandShowcase() {
                         {/* Main Typography */}
                         <motion.div style={{ scale, opacity }} className="text-center mt-12 mb-8 relative z-20 mix-blend-screen">
                             <h1 className="text-5xl md:text-7xl lg:text-8xl font-serif text-[#F2F0E9]">Men's Fashion</h1>
-                            <h1 className="text-5xl md:text-7xl lg:text-8xl font-serif text-[#FFEDA8] italic -mt-2 md:-mt-4">Reimagined</h1>
+                            <h1 className="text-5xl md:text-7xl lg:text-8xl font-serif text-[#FFEDA8] dark:text-white italic -mt-2 md:-mt-4">Reimagined</h1>
                         </motion.div>
 
                         {/* THE ARCH */}
                         <div className="flex-1 w-full max-w-[500px] relative px-4">
                             <motion.div
                                 style={{ clipPath: isMobile ? undefined : archClip }}
-                                className="w-full h-full bg-[#002420] rounded-t-[300px] relative overflow-hidden border-t border-x border-white/10"
+                                className="w-full h-full bg-[#002420] dark:bg-[#0A0A0A] rounded-t-[300px] relative overflow-hidden border-t border-x border-white/10"
                             >
                                 <div className="absolute inset-0 bg-red-900 mix-blend-multiply opacity-20" /> {/* Slight warm tint like reference */}
                                 <img src="/nox_men_model.png" className="w-full h-full object-cover opacity-90 scale-105" />
@@ -136,7 +136,7 @@ export default function BrandShowcase() {
 
                         {/* Top Quadrant: Brand Block */}
                         <div className="h-[40%] border-b border-transparent relative flex flex-col items-center justify-center">
-                            <div className="w-full h-full rounded-b-full bg-[#004D45]/30 flex flex-col items-center justify-center relative overflow-hidden">
+                            <div className="w-full h-full rounded-b-full bg-[#004D45]/30 dark:bg-[#1A1A1A]/30 flex flex-col items-center justify-center relative overflow-hidden">
                                 <div className="mt-12 text-center">
                                     <h4 className="font-serif text-2xl text-white">NOX</h4>
                                     <span className="text-[0.5rem] tracking-widest text-white/50 uppercase mt-2 block">Presented By<br />Noel Bijesh E</span>

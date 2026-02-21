@@ -65,7 +65,7 @@ export default function UserProfile() {
             <div className="max-w-3xl mx-auto">
                 {/* Sidebar / Info Card */}
                 <div className="space-y-6">
-                    <div className="bg-white dark:bg-[#424242] rounded-lg shadow-md p-6 relative">
+                    <div className="bg-white dark:bg-[#1A1A1A] rounded-lg shadow-md p-6 relative">
                         {/* Edit Toggle */}
                         <button
                             onClick={() => {
@@ -75,7 +75,7 @@ export default function UserProfile() {
                             className={`absolute top-4 right-4 p-2 rounded-full transition-smooth
                                 ${isEditing
                                     ? 'bg-green-100 text-green-600 hover:bg-green-200'
-                                    : 'bg-gray-100 dark:bg-[#363636] text-gray-600 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-[#282828]'}`}
+                                    : 'bg-gray-100 dark:bg-[#121212] text-gray-600 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-[#282828]'}`}
                             title={isEditing ? "Save Changes" : "Edit Profile"}
                         >
                             {isEditing ? <Save className="w-4 h-4" /> : <Edit2 className="w-4 h-4" />}

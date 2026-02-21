@@ -42,8 +42,8 @@ export default function ProductModal({ product, onClose }: ProductModalProps) {
   return (
     <>
       <div className="fixed inset-0 bg-black bg-opacity-50 z-50 flex items-center justify-center p-4">
-        <div className="bg-white dark:bg-[#424242] rounded-2xl shadow-2xl max-w-5xl w-full max-h-[90vh] overflow-y-auto transition-smooth">
-          <div className="sticky top-0 bg-white dark:bg-[#424242] border-b border-gray-200 dark:border-[#4A4A4A] p-6 flex justify-between items-center z-10">
+        <div className="bg-white dark:bg-[#1A1A1A] rounded-2xl shadow-2xl max-w-5xl w-full max-h-[90vh] overflow-y-auto transition-smooth">
+          <div className="sticky top-0 bg-white dark:bg-[#1A1A1A] border-b border-gray-200 dark:border-[#4A4A4A] p-6 flex justify-between items-center z-10">
             <h2 className="text-2xl font-serif font-bold text-primary dark:text-white">
               {product.name}
             </h2>
@@ -65,7 +65,7 @@ export default function ProductModal({ product, onClose }: ProductModalProps) {
                 />
                 <button
                   onClick={() => setShowZoom(true)}
-                  className="absolute top-4 right-4 p-3 bg-white dark:bg-[#363636] rounded-full shadow-lg opacity-0 group-hover:opacity-100 transition-smooth"
+                  className="absolute top-4 right-4 p-3 bg-white dark:bg-[#121212] rounded-full shadow-lg opacity-0 group-hover:opacity-100 transition-smooth"
                 >
                   <ZoomIn className="w-5 h-5 text-gray-700 dark:text-gray-300" />
                 </button>
@@ -96,7 +96,7 @@ export default function ProductModal({ product, onClose }: ProductModalProps) {
             <div>
               <div className="mb-6">
                 <div className="flex items-center space-x-3 mb-4">
-                  <span className="px-3 py-1 bg-gray-100 dark:bg-[#363636] text-gray-700 dark:text-gray-300 text-sm rounded-full">
+                  <span className="px-3 py-1 bg-gray-100 dark:bg-[#121212] text-gray-700 dark:text-gray-300 text-sm rounded-full">
                     {product.collection}
                   </span>
                   {product.stock_quantity === 0 ? (
