@@ -1,6 +1,6 @@
 import { useState, useRef, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { ShoppingCart } from 'lucide-react';
+import { ShoppingCart, X } from 'lucide-react';
 import { useCart } from '../contexts/CartContext';
 
 interface Product {
@@ -13,6 +13,7 @@ interface Product {
     primary_image: string;
     stock_quantity: number;
     detail_images?: string[];
+    ring_sizes?: string[];
 }
 
 interface AlternateCollectionsProps {
@@ -24,6 +25,8 @@ interface AlternateCollectionsProps {
 export default function AlternateCollections({ products, externalSelectedIndex = 0, onSelectionChange }: AlternateCollectionsProps) {
     const { addToCart } = useCart();
     const [addingToCart, setAddingToCart] = useState<string | null>(null);
+    const [selectedSize, setSelectedSize] = useState<string>('');
+    const [showRingChart, setShowRingChart] = useState(false);
     const scrollRef = useRef<HTMLDivElement>(null);
     const itemRefs = useRef<(HTMLDivElement | null)[]>([]);
 
@@ -83,7 +86,19 @@ export default function AlternateCollections({ products, externalSelectedIndex =
         }
     };
 
-    if (!products || products.length === 0) {
+    const selectedProduct = products && products.length > 0 ? (products[selectedIndex] || products[0]) : null;
+
+    useEffect(() => {
+        if (selectedProduct?.ring_sizes && selectedProduct.ring_sizes.length > 0) {
+            if (!selectedSize || !selectedProduct.ring_sizes.includes(selectedSize)) {
+                setSelectedSize(selectedProduct.ring_sizes[0]);
+            }
+        } else {
+            setSelectedSize('');
+        }
+    }, [selectedProduct, selectedSize]);
+
+    if (!products || products.length === 0 || !selectedProduct) {
         return (
             <div className="h-[85vh] flex items-center justify-center bg-gray-50 dark:bg-[#121212] transition-colors duration-500">
                 <div className="animate-pulse text-gray-500 dark:text-white/60 tracking-[0.2em] uppercase text-xs font-bold">
@@ -93,12 +108,12 @@ export default function AlternateCollections({ products, externalSelectedIndex =
         );
     }
 
-    const selectedProduct = products[selectedIndex] || products[0];
-
     const handleAddToCart = async (product: Product) => {
         if (!product || product.stock_quantity <= 0) return;
+        if (product.ring_sizes && product.ring_sizes.length > 0 && !selectedSize) return;
+
         setAddingToCart(product.id);
-        await addToCart(product.id);
+        await addToCart(product.id, 1, selectedSize);
         setTimeout(() => setAddingToCart(null), 1000); // Visual feedback delay
     };
 
@@ -138,6 +153,26 @@ export default function AlternateCollections({ products, externalSelectedIndex =
                                 <div className="text-gray-500 dark:text-white/60 transition-colors duration-500">Value</div>
                                 <div className="text-gray-900 dark:text-white transition-colors duration-500">${selectedProduct.price?.toFixed(2)}</div>
                             </div>
+
+                            {selectedProduct.ring_sizes && selectedProduct.ring_sizes.length > 0 && (
+                                <div className="mt-8 transition-opacity duration-300">
+                                    <div className="flex justify-between items-center mb-3">
+                                        <span className="text-[10px] md:text-xs font-bold uppercase tracking-[0.1em] text-gray-500 dark:text-white/60">Select Size</span>
+                                        <button onClick={() => setShowRingChart(true)} className="text-[10px] md:text-xs underline text-primary dark:text-white uppercase tracking-[0.1em] hover:text-gray-500 transition-colors">Size Guide</button>
+                                    </div>
+                                    <div className="flex flex-wrap gap-2">
+                                        {selectedProduct.ring_sizes.map(size => (
+                                            <button
+                                                key={size}
+                                                onClick={() => setSelectedSize(size)}
+                                                className={`px-4 py-2 text-xs font-bold uppercase tracking-[0.1em] transition-all duration-300 ${selectedSize === size ? 'bg-primary dark:bg-white text-white dark:text-[#121212] border border-primary dark:border-white' : 'bg-transparent text-primary dark:text-white border border-gray-300 dark:border-[#4A4A4A] hover:border-gray-500 dark:hover:border-gray-300'}`}
+                                            >
+                                                {size}
+                                            </button>
+                                        ))}
+                                    </div>
+                                </div>
+                            )}
 
                             <button
                                 onClick={() => handleAddToCart(selectedProduct)}
@@ -256,6 +291,38 @@ export default function AlternateCollections({ products, externalSelectedIndex =
                             </div>
                         </div>
                     </motion.section>
+                )}
+            </AnimatePresence>
+
+            {/* Ring Chart Modal */}
+            <AnimatePresence>
+                {showRingChart && (
+                    <motion.div
+                        initial={{ opacity: 0 }}
+                        animate={{ opacity: 1 }}
+                        exit={{ opacity: 0 }}
+                        className="fixed inset-0 z-[100] bg-black/80 flex items-center justify-center p-4 backdrop-blur-sm"
+                        onClick={() => setShowRingChart(false)}
+                    >
+                        <motion.div
+                            initial={{ scale: 0.95, opacity: 0 }}
+                            animate={{ scale: 1, opacity: 1 }}
+                            exit={{ scale: 0.95, opacity: 0 }}
+                            className="relative bg-white dark:bg-[#1A1A1A] p-6 md:p-8 rounded-2xl max-w-3xl w-full max-h-[90vh] overflow-y-auto shadow-2xl flex flex-col items-center"
+                            onClick={e => e.stopPropagation()}
+                        >
+                            <button onClick={() => setShowRingChart(false)} className="absolute top-4 right-4 p-2 bg-gray-100 dark:bg-[#2A2A2A] rounded-full hover:bg-gray-200 dark:hover:bg-[#363636] transition-colors z-10">
+                                <X className="w-5 h-5 text-gray-800 dark:text-gray-200" />
+                            </button>
+                            <h3 className="text-2xl font-black uppercase tracking-tighter text-primary dark:text-white mb-6 text-center">Ring Size Guide</h3>
+                            <div className="w-full bg-gray-50 dark:bg-[#121212] rounded-xl p-4 flex items-center justify-center">
+                                <img src="/ring-size-guide.png" alt="Ring Chart" className="max-w-full h-auto object-contain rounded drop-shadow-md" />
+                            </div>
+                            <p className="text-sm font-medium tracking-wide text-center text-gray-500 dark:text-gray-400 mt-6 max-w-md">
+                                For best accuracy, measure the inside diameter of an existing ring or wrap a string around your finger to find the circumference.
+                            </p>
+                        </motion.div>
+                    </motion.div>
                 )}
             </AnimatePresence>
         </>

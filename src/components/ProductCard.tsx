@@ -19,6 +19,7 @@ interface Product {
   detail_images: string[];
   rating?: number;
   review_count?: number;
+  ring_sizes?: string[];
 }
 
 interface ProductCardProps {
@@ -32,12 +33,16 @@ export default function ProductCard({ product, onQuickView }: ProductCardProps) 
   const [addingToCart, setAddingToCart] = useState(false);
 
   // Find if item is in cart
-  const cartItem = items.find(item => item.product_id === product.id);
-  const quantityInCart = cartItem?.quantity || 0;
+  const quantityInCart = items.filter(item => item.product_id === product.id).reduce((sum, item) => sum + item.quantity, 0);
 
   const handleAddToCart = async (e: React.MouseEvent) => {
     e.stopPropagation();
     if (product.stock_quantity === 0) return;
+
+    if (product.ring_sizes && product.ring_sizes.length > 0) {
+      onQuickView(product);
+      return;
+    }
 
     setAddingToCart(true);
     try {
@@ -132,7 +137,7 @@ export default function ProductCard({ product, onQuickView }: ProductCardProps) 
           </p>
 
           <div className="h-10">
-            {quantityInCart > 0 ? (
+            {quantityInCart > 0 && !(product.ring_sizes && product.ring_sizes.length > 0) ? (
               // Quantity Selector
               <div onClick={(e) => e.stopPropagation()} className="flex items-center bg-gray-900 dark:bg-white text-white dark:text-[#363636] rounded-lg h-full px-1 shadow-md">
                 <button
