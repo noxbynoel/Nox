@@ -136,7 +136,7 @@ export default function AlternateCollections({ products, externalSelectedIndex =
                                 Item {(selectedIndex + 1).toString().padStart(2, '0')} / {products.length.toString().padStart(2, '0')}
                             </p>
 
-                            <h2 className="text-3xl md:text-4xl lg:text-5xl font-black uppercase tracking-tight mb-8 md:mb-12 leading-[0.85] whitespace-nowrap text-primary dark:text-white transition-colors duration-500 mr-4">
+                            <h2 className="text-3xl md:text-4xl lg:text-5xl font-black uppercase tracking-tight mb-8 md:mb-12 leading-[0.85] whitespace-nowrap text-black dark:text-white transition-colors duration-500 mr-4">
                                 {selectedProduct.name}
                             </h2>
 
@@ -158,14 +158,14 @@ export default function AlternateCollections({ products, externalSelectedIndex =
                                 <div className="mt-8 transition-opacity duration-300">
                                     <div className="flex justify-between items-center mb-3">
                                         <span className="text-[10px] md:text-xs font-bold uppercase tracking-[0.1em] text-gray-500 dark:text-white/60">Select Size</span>
-                                        <button onClick={() => setShowRingChart(true)} className="text-[10px] md:text-xs underline text-primary dark:text-white uppercase tracking-[0.1em] hover:text-gray-500 transition-colors">Size Guide</button>
+                                        <button onClick={() => setShowRingChart(true)} className="text-[10px] md:text-xs underline text-black dark:text-white uppercase tracking-[0.1em] hover:text-gray-500 transition-colors">Size Guide</button>
                                     </div>
                                     <div className="flex flex-wrap gap-2">
                                         {selectedProduct.ring_sizes.map(size => (
                                             <button
                                                 key={size}
                                                 onClick={() => setSelectedSize(size)}
-                                                className={`px-4 py-2 text-xs font-bold uppercase tracking-[0.1em] transition-all duration-300 ${selectedSize === size ? 'bg-primary dark:bg-white text-white dark:text-[#121212] border border-primary dark:border-white' : 'bg-transparent text-primary dark:text-white border border-gray-300 dark:border-[#4A4A4A] hover:border-gray-500 dark:hover:border-gray-300'}`}
+                                                className={`px-4 py-2 text-xs font-bold uppercase tracking-[0.1em] transition-all duration-300 ${selectedSize === size ? 'bg-black dark:bg-white text-white dark:text-[#121212] border border-black dark:border-white' : 'bg-transparent text-black dark:text-white border border-gray-300 dark:border-[#4A4A4A] hover:border-gray-500 dark:hover:border-gray-300'}`}
                                             >
                                                 {size}
                                             </button>
@@ -181,7 +181,7 @@ export default function AlternateCollections({ products, externalSelectedIndex =
                                     ? 'bg-gray-200 dark:bg-gray-800 text-gray-400 dark:text-gray-500 cursor-not-allowed'
                                     : addingToCart === selectedProduct.id
                                         ? 'bg-green-600 text-white shadow-lg shadow-green-600/20'
-                                        : 'bg-primary dark:bg-white text-white dark:text-[#363636] hover:bg-primary-light dark:hover:bg-gray-100 shadow-xl shadow-primary/20 dark:shadow-white/10 hover:-translate-y-1'
+                                        : 'bg-black dark:bg-white text-white dark:text-[#363636] hover:bg-gray-800 dark:hover:bg-gray-100 shadow-xl shadow-black/20 dark:shadow-white/10 hover:-translate-y-1'
                                     }`}
                             >
                                 {addingToCart === selectedProduct.id ? (
@@ -261,7 +261,7 @@ export default function AlternateCollections({ products, externalSelectedIndex =
                                 transition={{ duration: 0.5 }}
                                 className="flex flex-col items-start mb-16"
                             >
-                                <h3 className="text-3xl md:text-4xl lg:text-5xl font-black uppercase tracking-tighter text-primary dark:text-white mb-4 text-left transition-colors duration-500">
+                                <h3 className="text-3xl md:text-4xl lg:text-5xl font-black uppercase tracking-tighter text-black dark:text-white mb-4 text-left transition-colors duration-500">
                                     Finer Details
                                 </h3>
                                 <p className="text-gray-500 dark:text-white/60 tracking-[0.2em] font-bold uppercase text-xs text-left transition-colors duration-500">
@@ -314,7 +314,7 @@ export default function AlternateCollections({ products, externalSelectedIndex =
                             <button onClick={() => setShowRingChart(false)} className="absolute top-4 right-4 p-2 bg-gray-100 dark:bg-[#2A2A2A] rounded-full hover:bg-gray-200 dark:hover:bg-[#363636] transition-colors z-10">
                                 <X className="w-5 h-5 text-gray-800 dark:text-gray-200" />
                             </button>
-                            <h3 className="text-2xl font-black uppercase tracking-tighter text-primary dark:text-white mb-6 text-center">Ring Size Guide</h3>
+                            <h3 className="text-2xl font-black uppercase tracking-tighter text-black dark:text-white mb-6 text-center">Ring Size Guide</h3>
                             <div className="w-full bg-gray-50 dark:bg-[#121212] rounded-xl p-4 flex items-center justify-center">
                                 <img src="/Ring_Chart.png" alt="Ring Chart" className="max-w-full h-auto object-contain rounded drop-shadow-md" />
                             </div>
