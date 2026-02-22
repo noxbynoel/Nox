@@ -17,6 +17,7 @@ interface CartItem {
   id?: string;
   product_id: string;
   quantity: number;
+  ring_size?: string;
   product?: {
     id: string;
     name: string;
@@ -29,9 +30,9 @@ interface CartItem {
 interface CartContextType {
   items: CartItem[];
   loading: boolean;
-  addToCart: (productId: string, quantity?: number) => Promise<void>;
-  updateQuantity: (productId: string, quantity: number) => Promise<void>;
-  removeFromCart: (productId: string) => Promise<void>;
+  addToCart: (productId: string, quantity?: number, ringSize?: string) => Promise<void>;
+  updateQuantity: (productId: string, quantity: number, ringSize?: string) => Promise<void>;
+  removeFromCart: (productId: string, ringSize?: string) => Promise<void>;
   clearCart: () => Promise<void>;
   getTotalItems: () => number;
   getTotalPrice: () => number;
@@ -93,9 +94,9 @@ export function CartProvider({ children }: { children: ReactNode }) {
         where('product_id', '==', item.product_id)
       );
       const querySnapshot = await getDocs(q);
+      const existingDoc = querySnapshot.docs.find(d => d.data().ring_size === item.ring_size);
 
-      if (!querySnapshot.empty) {
-        const existingDoc = querySnapshot.docs[0];
+      if (existingDoc) {
         await updateDoc(doc(db, 'cart_items', existingDoc.id), {
           quantity: existingDoc.data().quantity + item.quantity
         });
@@ -104,6 +105,7 @@ export function CartProvider({ children }: { children: ReactNode }) {
           user_id: user.uid,
           product_id: item.product_id,
           quantity: item.quantity,
+          ...(item.ring_size && { ring_size: item.ring_size })
         });
       }
     }
@@ -137,7 +139,7 @@ export function CartProvider({ children }: { children: ReactNode }) {
     loadCart();
   }, [user]);
 
-  const addToCart = async (productId: string, quantity = 1) => {
+  const addToCart = async (productId: string, quantity = 1, ringSize?: string) => {
     if (user) {
       const q = query(
         collection(db, 'cart_items'),
@@ -145,9 +147,9 @@ export function CartProvider({ children }: { children: ReactNode }) {
         where('product_id', '==', productId)
       );
       const querySnapshot = await getDocs(q);
+      const existingDoc = querySnapshot.docs.find(d => d.data().ring_size === ringSize);
 
-      if (!querySnapshot.empty) {
-        const existingDoc = querySnapshot.docs[0];
+      if (existingDoc) {
         await updateDoc(doc(db, 'cart_items', existingDoc.id), {
           quantity: existingDoc.data().quantity + quantity
         });
@@ -156,6 +158,7 @@ export function CartProvider({ children }: { children: ReactNode }) {
           user_id: user.uid,
           product_id: productId,
           quantity,
+          ...(ringSize && { ring_size: ringSize })
         });
       }
 
@@ -164,20 +167,20 @@ export function CartProvider({ children }: { children: ReactNode }) {
     } else {
       const guestCart = loadGuestCart();
       const existingIndex = guestCart.findIndex(
-        (item: CartItem) => item.product_id === productId
+        (item: CartItem) => item.product_id === productId && item.ring_size === ringSize
       );
 
       if (existingIndex >= 0) {
         guestCart[existingIndex].quantity += quantity;
       } else {
-        guestCart.push({ product_id: productId, quantity });
+        guestCart.push({ product_id: productId, quantity, ring_size: ringSize });
       }
 
       saveGuestCart(guestCart);
 
       const product = await fetchProductDetails(productId);
       const updatedItems = [...items];
-      const itemIndex = updatedItems.findIndex((i) => i.product_id === productId);
+      const itemIndex = updatedItems.findIndex((i) => i.product_id === productId && i.ring_size === ringSize);
 
       if (itemIndex >= 0) {
         updatedItems[itemIndex].quantity += quantity;
@@ -185,6 +188,7 @@ export function CartProvider({ children }: { children: ReactNode }) {
         updatedItems.push({
           product_id: productId,
           quantity,
+          ring_size: ringSize,
           product: product || undefined,
         });
       }
@@ -193,9 +197,9 @@ export function CartProvider({ children }: { children: ReactNode }) {
     }
   };
 
-  const updateQuantity = async (productId: string, quantity: number) => {
+  const updateQuantity = async (productId: string, quantity: number, ringSize?: string) => {
     if (quantity <= 0) {
-      await removeFromCart(productId);
+      await removeFromCart(productId, ringSize);
       return;
     }
 
@@ -206,16 +210,17 @@ export function CartProvider({ children }: { children: ReactNode }) {
         where('product_id', '==', productId)
       );
       const querySnapshot = await getDocs(q);
+      const existingDoc = querySnapshot.docs.find(d => d.data().ring_size === ringSize);
 
-      if (!querySnapshot.empty) {
-        await updateDoc(doc(db, 'cart_items', querySnapshot.docs[0].id), { quantity });
+      if (existingDoc) {
+        await updateDoc(doc(db, 'cart_items', existingDoc.id), { quantity });
         const updatedCart = await loadUserCart();
         setItems(updatedCart);
       }
     } else {
       const guestCart = loadGuestCart();
       const itemIndex = guestCart.findIndex(
-        (item: CartItem) => item.product_id === productId
+        (item: CartItem) => item.product_id === productId && item.ring_size === ringSize
       );
 
       if (itemIndex >= 0) {
@@ -223,14 +228,14 @@ export function CartProvider({ children }: { children: ReactNode }) {
         saveGuestCart(guestCart);
         setItems(
           items.map((item) =>
-            item.product_id === productId ? { ...item, quantity } : item
+            item.product_id === productId && item.ring_size === ringSize ? { ...item, quantity } : item
           )
         );
       }
     }
   };
 
-  const removeFromCart = async (productId: string) => {
+  const removeFromCart = async (productId: string, ringSize?: string) => {
     if (user) {
       const q = query(
         collection(db, 'cart_items'),
@@ -238,19 +243,20 @@ export function CartProvider({ children }: { children: ReactNode }) {
         where('product_id', '==', productId)
       );
       const querySnapshot = await getDocs(q);
+      const existingDoc = querySnapshot.docs.find(d => d.data().ring_size === ringSize);
 
-      if (!querySnapshot.empty) {
-        await deleteDoc(doc(db, 'cart_items', querySnapshot.docs[0].id));
+      if (existingDoc) {
+        await deleteDoc(doc(db, 'cart_items', existingDoc.id));
         const updatedCart = await loadUserCart();
         setItems(updatedCart);
       }
     } else {
       const guestCart = loadGuestCart();
       const filtered = guestCart.filter(
-        (item: CartItem) => item.product_id !== productId
+        (item: CartItem) => !(item.product_id === productId && item.ring_size === ringSize)
       );
       saveGuestCart(filtered);
-      setItems(items.filter((item) => item.product_id !== productId));
+      setItems(items.filter((item) => !(item.product_id === productId && item.ring_size === ringSize)));
     }
   };
 

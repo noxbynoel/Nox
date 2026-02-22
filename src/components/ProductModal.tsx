@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { X, ZoomIn, ShoppingCart } from 'lucide-react';
 import { useCart } from '../contexts/CartContext';
 import ProductReviews from './ProductReviews';
@@ -17,6 +17,7 @@ interface Product {
   primary_image: string;
   hover_image: string;
   detail_images: string[];
+  ring_sizes?: string[];
 }
 
 interface ProductModalProps {
@@ -30,12 +31,26 @@ export default function ProductModal({ product, onClose }: ProductModalProps) {
   const [quantity, setQuantity] = useState(1);
   const [showZoom, setShowZoom] = useState(false);
   const [adding, setAdding] = useState(false);
+  const [selectedSize, setSelectedSize] = useState<string>('');
+  const [showRingChart, setShowRingChart] = useState(false);
+
+  useEffect(() => {
+    if (product.ring_sizes && product.ring_sizes.length > 0) {
+      if (!selectedSize || !product.ring_sizes.includes(selectedSize)) {
+        setSelectedSize(product.ring_sizes[0]);
+      }
+    } else {
+      setSelectedSize('');
+    }
+  }, [product, selectedSize]);
 
   const allImages = [product.primary_image, product.hover_image, ...product.detail_images];
 
   const handleAddToCart = async () => {
+    if (product.ring_sizes && product.ring_sizes.length > 0 && !selectedSize) return;
+
     setAdding(true);
-    await addToCart(product.id, quantity);
+    await addToCart(product.id, quantity, selectedSize);
     setTimeout(() => setAdding(false), 1000);
   };
 
@@ -124,6 +139,26 @@ export default function ProductModal({ product, onClose }: ProductModalProps) {
                     <p className="font-medium text-gray-900 dark:text-gray-100">{product.color}</p>
                   </div>
                 </div>
+
+                {product.ring_sizes && product.ring_sizes.length > 0 && (
+                  <div className="mb-6">
+                    <div className="flex justify-between items-center mb-2">
+                      <p className="text-sm text-gray-500 dark:text-gray-500">Size</p>
+                      <button onClick={() => setShowRingChart(true)} className="text-xs text-primary dark:text-white underline hover:text-gray-500 transition-colors">Size Guide</button>
+                    </div>
+                    <div className="flex flex-wrap gap-2">
+                      {product.ring_sizes.map(size => (
+                        <button
+                          key={size}
+                          onClick={() => setSelectedSize(size)}
+                          className={`px-4 py-2 border rounded-md text-sm font-medium transition-all duration-300 ${selectedSize === size ? 'border-primary dark:border-white bg-primary dark:bg-white text-white dark:text-[#121212]' : 'border-gray-200 dark:border-[#4A4A4A] hover:border-gray-300 dark:hover:border-gray-500 text-gray-900 dark:text-gray-100'}`}
+                        >
+                          {size}
+                        </button>
+                      ))}
+                    </div>
+                  </div>
+                )}
               </div>
 
               <div className="border-t border-gray-200 dark:border-[#4A4A4A] pt-6">
@@ -194,8 +229,23 @@ export default function ProductModal({ product, onClose }: ProductModalProps) {
             />
           </div>
         </div>
-      )
-      }
+      )}
+
+      {showRingChart && (
+        <div
+          className="fixed inset-0 bg-black bg-opacity-90 z-[70] flex items-center justify-center p-4"
+          onClick={() => setShowRingChart(false)}
+        >
+          <div className="relative bg-white dark:bg-[#1A1A1A] p-6 rounded-2xl max-w-2xl w-full max-h-[90vh] overflow-y-auto" onClick={e => e.stopPropagation()}>
+            <button onClick={() => setShowRingChart(false)} className="absolute top-4 right-4 p-2 bg-gray-100 dark:bg-[#363636] rounded-full hover:bg-gray-200 transition-colors z-10">
+              <X className="w-5 h-5 text-gray-800 dark:text-gray-200" />
+            </button>
+            <h3 className="text-2xl font-serif font-bold text-primary dark:text-white mb-6 text-center">Ring Size Guide</h3>
+            <img src="/Ring_Chart.png" alt="Ring Chart" className="w-full h-auto object-contain rounded" />
+            <p className="text-sm text-center text-gray-500 mt-4">For best accuracy, measure the inside diameter of an existing ring.</p>
+          </div>
+        </div>
+      )}
     </>
   );
 }

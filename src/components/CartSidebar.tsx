@@ -43,7 +43,7 @@ export default function CartSidebar({ isOpen, onClose, onCheckout }: CartSidebar
             <div className="space-y-4">
               {items.map((item) => (
                 <div
-                  key={item.product_id}
+                  key={`${item.product_id}-${item.ring_size || 'no-size'}`}
                   className="flex gap-4 p-4 bg-gray-50 dark:bg-[#1A1A1A] rounded-lg"
                 >
                   <img
@@ -55,6 +55,7 @@ export default function CartSidebar({ isOpen, onClose, onCheckout }: CartSidebar
                   <div className="flex-1">
                     <h3 className="font-medium text-gray-900 dark:text-gray-100 mb-1">
                       {item.product?.name}
+                      {item.ring_size && <span className="text-gray-500 text-sm ml-2">Size {item.ring_size}</span>}
                     </h3>
                     <p className="text-sm text-primary dark:text-white font-bold mb-2">
                       ${item.product?.price.toFixed(2)}
@@ -63,14 +64,14 @@ export default function CartSidebar({ isOpen, onClose, onCheckout }: CartSidebar
                     <div className="flex items-center justify-between">
                       <div className="flex items-center border border-gray-300 dark:border-[#4A4A4A] rounded">
                         <button
-                          onClick={() => updateQuantity(item.product_id, item.quantity - 1)}
+                          onClick={() => updateQuantity(item.product_id, item.quantity - 1, item.ring_size)}
                           className="px-2 py-1 hover:bg-gray-100 dark:hover:bg-[#363636] transition-smooth text-gray-700 dark:text-gray-300"
                         >
                           -
                         </button>
                         <span className="px-3 py-1 text-gray-900 dark:text-gray-100">{item.quantity}</span>
                         <button
-                          onClick={() => updateQuantity(item.product_id, item.quantity + 1)}
+                          onClick={() => updateQuantity(item.product_id, item.quantity + 1, item.ring_size)}
                           className="px-2 py-1 hover:bg-gray-100 dark:hover:bg-[#363636] transition-smooth text-gray-700 dark:text-gray-300"
                         >
                           +
@@ -78,7 +79,7 @@ export default function CartSidebar({ isOpen, onClose, onCheckout }: CartSidebar
                       </div>
 
                       <button
-                        onClick={() => removeFromCart(item.product_id)}
+                        onClick={() => removeFromCart(item.product_id, item.ring_size)}
                         className="p-2 text-red-500 hover:bg-red-50 dark:hover:bg-red-900/20 rounded transition-smooth"
                       >
                         <Trash2 className="w-4 h-4" />
