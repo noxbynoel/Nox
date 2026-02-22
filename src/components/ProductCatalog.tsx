@@ -3,6 +3,7 @@ import { collection, query, orderBy, getDocs } from 'firebase/firestore';
 import { db } from '../lib/firebase';
 import AlternateHero from './AlternateHero';
 import AlternateCollections from './AlternateCollections';
+import About from './About';
 
 interface Product {
   id: string;
@@ -56,18 +57,24 @@ export default function ProductCatalog() {
   };
 
   return (
-    <>
-      <AlternateHero
-        products={products}
-        onProductClick={handleHeroItemClick}
-      />
-      <div ref={collectionsRef} id="collections">
-        <AlternateCollections
+    <div className="relative w-full">
+      <div className="sticky top-0 z-0 w-full">
+        <AlternateHero
           products={products}
-          externalSelectedIndex={heroSelectedIndex}
-          onSelectionChange={setHeroSelectedIndex}
+          onProductClick={handleHeroItemClick}
         />
       </div>
-    </>
+
+      <div className="relative z-10 w-full shadow-[0_-20px_50px_rgba(0,0,0,0.1)] dark:shadow-[0_-20px_50px_rgba(0,0,0,0.5)] bg-[#F6F6F6] dark:bg-[#121212]">
+        <About />
+        <div ref={collectionsRef} id="collections" className="w-full">
+          <AlternateCollections
+            products={products}
+            externalSelectedIndex={heroSelectedIndex}
+            onSelectionChange={setHeroSelectedIndex}
+          />
+        </div>
+      </div>
+    </div>
   );
 }
