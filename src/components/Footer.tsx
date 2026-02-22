@@ -31,7 +31,7 @@ export default function Footer({ onNavigate }: FooterProps) {
           <div className="max-w-md mb-8 md:mb-0">
             <button
               onClick={() => handleNav('home')}
-              className="text-2xl font-black uppercase tracking-tighter text-primary dark:text-white mb-2 transition-smooth"
+              className="text-2xl font-black uppercase tracking-tighter text-black dark:text-white mb-2 transition-smooth"
             >
               NOX
             </button>
@@ -46,7 +46,7 @@ export default function Footer({ onNavigate }: FooterProps) {
                 <li key={link.label}>
                   <button
                     onClick={() => handleNav(link.page)}
-                    className="hover:text-primary dark:hover:text-white transition-smooth font-bold uppercase tracking-[0.2em] text-[10px]"
+                    className="hover:text-black dark:hover:text-white transition-smooth font-bold uppercase tracking-[0.2em] text-[10px]"
                   >
                     {link.label}
                   </button>

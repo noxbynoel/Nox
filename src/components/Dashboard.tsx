@@ -146,11 +146,11 @@ Date: ${new Date(order.created_at).toLocaleDateString()}
 Status: PENDING PAYMENT
 
 Items:
-${order.order_items.map((item) => `${item.product.name} x${item.quantity} - $${item.total_price.toFixed(2)}`).join('\n')}
+${order.order_items.map((item) => `${item.product.name} x${item.quantity} - ₹${item.total_price.toFixed(2)}`).join('\n')}
 
-Subtotal: $${order.total_amount.toFixed(2)}
-Discount: -$${order.discount_amount.toFixed(2)}
-Total Amount: $${order.final_amount.toFixed(2)}
+Subtotal: ₹${order.total_amount.toFixed(2)}
+Discount: -₹${order.discount_amount.toFixed(2)}
+Total Amount: ₹${order.final_amount.toFixed(2)}
 
 This is a proforma invoice. Payment is pending confirmation.
     `;
@@ -176,11 +176,11 @@ Date: ${new Date(order.created_at).toLocaleDateString()}
 Payment Confirmed: ${order.payment_confirmed_at ? new Date(order.payment_confirmed_at).toLocaleDateString() : 'N/A'}
 
 Items:
-${order.order_items.map((item) => `${item.product.name} x${item.quantity} - $${item.total_price.toFixed(2)}`).join('\n')}
+${order.order_items.map((item) => `${item.product.name} x${item.quantity} - ₹${item.total_price.toFixed(2)}`).join('\n')}
 
-Subtotal: $${order.total_amount.toFixed(2)}
-Discount: -$${order.discount_amount.toFixed(2)}
-Total Amount Paid: $${order.final_amount.toFixed(2)}
+Subtotal: ₹${order.total_amount.toFixed(2)}
+Discount: -₹${order.discount_amount.toFixed(2)}
+Total Amount Paid: ₹${order.final_amount.toFixed(2)}
 
 Thank you for your purchase!
     `;
@@ -375,7 +375,7 @@ Thank you for your purchase!
                           </p>
                         </div>
                         <p className="text-sm font-medium text-gray-900 dark:text-gray-100">
-                          ${item.total_price.toFixed(2)}
+                          ₹{item.total_price.toFixed(2)}
                         </p>
                       </div>
                     ))}
@@ -384,7 +384,7 @@ Thank you for your purchase!
                   <div className="flex justify-between items-center pt-4 border-t border-gray-200 dark:border-[#4A4A4A]">
                     <span className="font-medium text-gray-900 dark:text-gray-100">Total</span>
                     <span className="text-xl font-bold text-primary dark:text-white">
-                      ${order.final_amount.toFixed(2)}
+                      ₹{order.final_amount.toFixed(2)}
                     </span>
                   </div>
                 </div>
