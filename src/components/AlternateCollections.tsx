@@ -6,6 +6,7 @@ import { useCart } from '../contexts/CartContext';
 interface Product {
     id: string;
     name: string;
+    description?: string;
     price: number;
     material: string;
     color: string;
@@ -153,6 +154,12 @@ export default function AlternateCollections({ products, externalSelectedIndex =
                                 <div className="text-gray-500 dark:text-white/60 transition-colors duration-500">Value</div>
                                 <div className="text-gray-900 dark:text-white transition-colors duration-500">₹{selectedProduct.price?.toFixed(2)}</div>
                             </div>
+
+                            {selectedProduct.description && (
+                                <p className="mt-4 md:mt-6 text-[10px] sm:text-xs text-gray-500 dark:text-white/50 leading-relaxed tracking-wide normal-case font-medium line-clamp-3 transition-colors duration-500">
+                                    {selectedProduct.description}
+                                </p>
+                            )}
 
                             {selectedProduct.ring_sizes && selectedProduct.ring_sizes.length > 0 && (
                                 <div className="mt-4 md:mt-8 transition-opacity duration-300">
